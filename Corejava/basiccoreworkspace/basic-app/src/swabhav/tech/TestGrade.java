@@ -10,7 +10,7 @@ public class TestGrade {
 	}
 
 	static void resultOf(float cgpa) {
-		
+
 		if (cgpa >= 8) {
 			System.out.println("Result is outstanding");
 		} else if (cgpa >= 7) {
