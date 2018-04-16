@@ -8,10 +8,11 @@ public class TestTable {
 	}
 
 	static void printTable(int number) {
-		System.out.println("Displaying the Table of" + number);
+		System.out.println("Displaying the Table of " + number);
 		int count = 1;
 		while (count <= 10) {
-			System.out.println(count + " x " + number + "=" + (count * number));
+			System.out.println(count + " x " + number + " = "
+					+ (count * number));
 			count = count + 1;
 		}
 	}

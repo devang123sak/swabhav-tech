@@ -4,9 +4,9 @@ public class TestPrime {
 
 	public static void main(String[] args) {
 		// primeValue(21);
-		// printAllPrimeBelow(10);
-		int isPrint = primeNumber(13);
-		System.out.println(isPrint);
+		// printAllPrimeBelow(100);
+		printAllPrimeBetweenRange(10, 50);
+
 	}
 
 	static void primeValue(int number) {
@@ -31,24 +31,41 @@ public class TestPrime {
 
 	static void printAllPrimeBelow(int number) {
 		{
+			for (int count = 2; count <= number; count++) {
+				int halfValue = count / 2;
+				boolean isPrime = true;
+
+				for (int count1 = 2; count1 <= halfValue; count1++) {
+					int newValue = count % count1;
+					if (newValue == 0) {
+						isPrime = false;
+
+					}
+
+				}
+				if (isPrime) {
+					System.out.println(count);
+
+				}
+			}
 
 		}
 	}
 
-	static int primeNumber(int number) {
-
-		int newValue = 0, halfNumber = number / 2;
-		for (int count = 2; count <= halfNumber; count++) {
-
-			newValue = number % count;
-			if (newValue == 0) {
-
-			
-
+	static void printAllPrimeBetweenRange(int start, int end) {
+		for (int count = start; count <= end; count++) {
+			int halfValue = count / 2;
+			boolean isPrime = true;
+			for (int count1 = 2; count1 <= halfValue; count1++) {
+				int newValue = count % count1;
+				if (newValue == 0) {
+					isPrime = false;
+				}
+			}
+			if (isPrime) {
+				System.out.println(count);
 			}
 		}
-
-		return newValue;
-
 	}
+
 }
