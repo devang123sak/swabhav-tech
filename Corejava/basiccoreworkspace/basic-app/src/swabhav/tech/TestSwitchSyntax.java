@@ -7,30 +7,30 @@ public class TestSwitchSyntax {
 		System.out.println("2) Subtracation");
 		System.out.println("3) Multiplication");
 		System.out.println("4) Divison");
-		int number = 1;
-		System.out.println("Given value is = " + number);
+		// int number = 1;
+		char operator = '-';
+		System.out.println("Given value is = " + operator);
 		System.out.println();
-		
-		
-		caseStudy(number);
+
+		caseStudy(operator);
 
 	}
 
-	private static void caseStudy(int number) {
-		switch (number) {
-		case "addition": {
+	private static void caseStudy(int operator) {
+		switch (operator) {
+		case '+': {
 			System.out.println("a+b");
 			break;
 		}
-		case "subtracation": {
+		case '-': {
 			System.out.println("a-b");
 			break;
 		}
-		case "multiply": {
+		case '*': {
 			System.out.println("a*b");
 			break;
 		}
-		case "division": {
+		case '/': {
 			System.out.println("a/b");
 			break;
 		}

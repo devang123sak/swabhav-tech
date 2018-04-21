@@ -3,7 +3,7 @@ package swabhav.tech;
 public class TestIntegerArray {
 
 	public static void main(String[] args) {
-		int[] nos = { 10, 20, 80, 30, 40 };
+		int[] nos = { 10, 20, 70, 80, 30, 40 };
 		// printNumber(nos);
 		// printSum(nos);
 		// printAverage(nos);
@@ -50,26 +50,20 @@ public class TestIntegerArray {
 	}
 
 	static void printSecondMax(int[] nos) {
-		int maxValue = nos[0];
+
+		int largestValue = nos[0];
+		int secondValue = nos[0];
+
 		for (int n : nos) {
-			if (maxValue < n) {
-				maxValue = n;
+			if (largestValue < n) {
+				secondValue = largestValue;
+				largestValue = n;
+
+			} else if (n > secondValue) {
+				secondValue = n;
 			}
 		}
-
-		int secondMax = nos[0];
-		for (int n : nos) {
-
-			if (maxValue != secondMax) {
-				if (maxValue < n) {
-
-					maxValue = n;
-				}
-
-			}
-
-		}
-		System.out.println(maxValue);
-		System.out.println(secondMax);
+		System.out.println("highest value = " + largestValue);
+		System.out.println("Second highest value = " + secondValue);
 	}
 }
