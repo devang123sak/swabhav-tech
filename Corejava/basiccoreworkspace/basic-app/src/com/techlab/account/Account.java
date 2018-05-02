@@ -31,7 +31,7 @@ public class Account {
 		this.balance = balance;
 	}
 
-	// this constructor is used to get balance value
+	// this constructor is used to initialize value
 	public Account(int accountNumber, String name, int balance) {
 		this.accountNumber = accountNumber;
 		this.name = name;

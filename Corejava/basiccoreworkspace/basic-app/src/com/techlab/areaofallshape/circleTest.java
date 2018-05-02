@@ -6,7 +6,6 @@ public class circleTest {
 		Circle obj = new Circle(10);
 		obj.printArea();
 
-		
 	}
 
 }

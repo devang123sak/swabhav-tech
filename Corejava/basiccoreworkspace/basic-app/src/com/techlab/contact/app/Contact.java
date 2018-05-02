@@ -39,17 +39,73 @@ public class Contact {
 		name.add(this.firstName);
 		name.add(this.middleName);
 		name.add(this.lastName);
-		System.out.println(name);
+		System.out.println("First Name = " + name.get(contactNumber));
+		
 	}
 
 	public void searchContact() {
 		for (String c : name) {
-			// if(firstName==name.)
+			if (firstName == name.get(contactNumber)) {
+				System.out.println(c);
+			}
 		}
 
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+
+		this.emailId = emailId;
+	}
+
+	public int getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(int contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public List<String> getName() {
+		return name;
+	}
+
+	public void setName(List<String> name) {
+		this.name = name;
+	}
+
 	public void exitContact() {
+		for (int i = 0; i < 1; i++) {
+			System.out.println("Successfully exit");
+			break;
+		}
 
 	}
 }
