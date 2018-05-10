@@ -4,6 +4,7 @@ public class Student {
 	private String name;
 	private int age;
 	private float cgpa;
+	private GenderType gender;
 
 	public String getName() {
 		return name;
@@ -27,6 +28,15 @@ public class Student {
 
 	public void setCgpa(float cgpa) {
 		this.cgpa = cgpa;
+	}
+
+	public GenderType getGender() {
+		return gender;
+	}
+
+	public void setGender(GenderType gender) {
+		this.gender = GenderType.MALE;
+		this.gender = GenderType.FEMALE;
 	}
 
 	public String calculateGrade() {
