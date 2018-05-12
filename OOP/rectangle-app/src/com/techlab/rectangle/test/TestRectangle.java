@@ -8,14 +8,14 @@ public class TestRectangle {
 		Rectangle r1 = new Rectangle();
 		r1.setWidth(-10);
 		r1.setHeight(500);
-		r1.setColor(ColorType.BLUE);
+		r1.setColor(ColorType.RED);
 		displayDetail(r1);
 		System.out.println(" ");
 
 		Rectangle r2 = new Rectangle();
 		r2.setHeight(30);
 		r2.setWidth(20);
-		r2.setColor(ColorType.GREEN);
+		// r2.setColor(ColorType.GREEN);
 		// displayDetail(r2);
 		displayDetail(new Rectangle());// anonymous variable
 

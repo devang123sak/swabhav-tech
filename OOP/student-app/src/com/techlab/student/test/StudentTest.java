@@ -10,7 +10,8 @@ public class StudentTest {
 		s1.setName("devang");
 		s1.setAge(22);
 		s1.setCgpa(7.2f);
-		s1.setGender(GenderType.MALE);;
+		s1.setGender(GenderType.MALE);
+		;
 		// System.out.println(s1.calculateGrade());
 		display(s1);
 		System.out.println("");
@@ -19,6 +20,7 @@ public class StudentTest {
 		s2.setName("Sachin");
 		s2.setAge(30);
 		s2.setCgpa(8.8f);
+		s2.setGender(GenderType.MALE);
 		display(s2);
 
 		System.out.println("");
@@ -41,5 +43,6 @@ public class StudentTest {
 		System.out.println("Age is = " + student.getAge());
 		System.out.println("cgpa is = " + student.getCgpa());
 		System.out.println("Result is = " + student.calculateGrade());
+		System.out.println("Gender is " + student.getGender());
 	}
 }

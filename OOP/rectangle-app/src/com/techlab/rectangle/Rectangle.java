@@ -28,18 +28,9 @@ public class Rectangle {
 	}
 
 	public void setColor(ColorType color) {
-		this.color = ColorType.BLUE;
-		this.color = ColorType.GREEN;
-		this.color = ColorType.RED;
-	}
+		this.color = color;
 
-	/*
-	 * public void setColor(String color) {
-	 * 
-	 * if (color.equalsIgnoreCase("red") || color.equalsIgnoreCase("blue") ||
-	 * color.equalsIgnoreCase("green")) { this.color = color; } else {
-	 * this.color = "red"; } }
-	 */
+	}
 
 	public double calculateArea() {
 
