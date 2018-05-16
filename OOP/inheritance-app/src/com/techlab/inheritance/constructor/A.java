@@ -7,4 +7,6 @@ abstract public class A {
 		System.out.println("A created " + foo);
 	}
 
+	abstract void run();
+
 }

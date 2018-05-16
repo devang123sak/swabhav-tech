@@ -10,6 +10,8 @@ public class TestClass {
 		B b3 = new B(200);
 		B b4 = new B(300);
 
-		A a1 = new B();
+		A a = new B(1000);
+		a.run();// without abstract method in class A a can not access run
+				// method.
 	}
 }

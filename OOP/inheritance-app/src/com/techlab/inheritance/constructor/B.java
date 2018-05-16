@@ -8,8 +8,12 @@ public class B extends A {
 	}
 
 	public B(int foo) {
-		super(foo);
+		super(foo);// Constructor call must be the first statement in a
+					// constructor
 		System.out.println("B created");
 	}
 
+	public void run() {
+		System.out.println("run");
+	}
 }
