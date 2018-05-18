@@ -1,6 +1,6 @@
 package com.techlab.inheritance.constructor;
 
-abstract public class A {
+public abstract class A {
 	int foo;
 
 	public A(int foo) {
@@ -8,5 +8,10 @@ abstract public class A {
 	}
 
 	abstract void run();
+
+	public String display(String data) {
+		System.out.println("Data from A class");
+		return data;
+	}
 
 }

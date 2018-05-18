@@ -1,5 +1,6 @@
 package com.techlab.inheritance.constructor;
 
+
 public class TestClass {
 
 	public static void main(String[] args) {
@@ -13,5 +14,7 @@ public class TestClass {
 		A a = new B(1000);
 		a.run();// without abstract method in class A a can not access run
 				// method.
+
+		
 	}
 }

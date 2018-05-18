@@ -1,6 +1,7 @@
 package com.techlab.inheritance.constructor;
 
 public class B extends A {
+	String data;
 
 	public B() {
 		super(100);
@@ -13,7 +14,24 @@ public class B extends A {
 		System.out.println("B created");
 	}
 
-	public void run() {
+	public String run(String data) {
 		System.out.println("run");
+		return data;
 	}
+
+	public String getData() {
+		System.out.println("hi");
+		return data;
+	}
+
+	public void setData(String data) {
+		System.out.println("set data called with  paramerer" + data);
+		this.data = data;
+	}
+
+	@Override
+	void run() {
+
+	}
+
 }
