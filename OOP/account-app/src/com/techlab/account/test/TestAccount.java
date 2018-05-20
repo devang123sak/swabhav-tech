@@ -7,8 +7,9 @@ public class TestAccount {
 	public static void main(String[] args) {
 
 		Account a = new Account("rahul", 1000);
-		a.deposite(3000);
-		a.withdraw(4000);
+		// a.deposite(4000);
+		a.withdraw(500);
+		System.out.println("balance = " + a.getBalance());
 
 		Account b = new Account("sachin", 2000);
 		b.deposite(1000);
@@ -25,10 +26,7 @@ public class TestAccount {
 		System.out.println(" ");
 		System.out.println("Account Number = " + acc.getAccNumber());
 		System.out.println("Name = " + acc.getName());
-		if (acc.getBalance() > 0) {
-			System.out.println("Balance = " + acc.getBalance());
-		} else
-			System.out.println("Balance = Balance is Low");
+		System.out.println("Balance = " + acc.getBalance());
 		System.out.println(" ");
 	}
 }

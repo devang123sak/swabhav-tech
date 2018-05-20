@@ -1,7 +1,7 @@
 package com.techlab.account;
 
 public class Account {
-	private static int accNumber = 1001;
+	private static int intialAccNumber = 1001;
 	private String name;
 	private double balance;
 	private int accountNumber;
@@ -9,7 +9,7 @@ public class Account {
 	public Account(String name, double balance) {
 		this.name = name;
 		this.balance = balance;
-		this.accountNumber = accNumber++;
+		this.accountNumber = intialAccNumber++;
 
 	}
 
@@ -44,12 +44,12 @@ public class Account {
 	}
 
 	public void withdraw(double amount) {
+		double minBalance = this.balance - 500;
 
-		if (this.balance > 500) {
+		if (minBalance >= amount) {
 			this.balance = this.balance - amount;
-		} else {
-			System.out.println("Balance is Less than 500.");
-		}
 
+		}
 	}
+
 }
