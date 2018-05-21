@@ -2,6 +2,7 @@ package com.techlab.test.custom.annotation;
 
 import java.lang.reflect.Method;
 
+
 //import com.techlab.custom.annotation.MyAnnotation;
 import com.techlab.custom.annotation.SingleValueAnnotation;
 
@@ -11,10 +12,7 @@ public class TestSingleValueAnnotation {
 			SecurityException {
 
 		SingleValueAnnotation s = new SingleValueAnnotation();
-		Method m = s.getClass().getMethod("sayHello");
-
-	//	MyAnnotation manno = m.getAnnotation(MyAnnotation.class);
-		//System.out.println("value is: " + manno.value());
+		s.myMethod();
 
 	}
 
