@@ -16,7 +16,7 @@ class Depersist {
 			System.out.println(s.id + " " + s.name);
 
 			in.close();
-			file.close();
+			//file.close();
 		} catch (IOException ex) {
 			System.out.println("IOException is caught");
 		}

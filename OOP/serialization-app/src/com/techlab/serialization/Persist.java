@@ -11,9 +11,9 @@ class Persist {
 		ObjectOutputStream out = new ObjectOutputStream(fout);
 
 		out.writeObject(s1);
-		//out.flush();
-		out.close();
-        fout.close();
+		out.flush();
+		//out.close();
+        //fout.close();
 		System.out.println("Serialization is successful...");
 		}
 		catch(IOException ex)
