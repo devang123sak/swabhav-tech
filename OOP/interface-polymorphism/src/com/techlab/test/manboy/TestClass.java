@@ -8,7 +8,7 @@ import com.techlab.manboy.Man;
 public class TestClass {
 
 	public static void main(String[] args) {
-		atTheMovie(new Man());
+		//atTheMovie(new Man());
 		atTheMovie(new Boy());
 
 		atTheParty(new Man());
