@@ -1,55 +1,43 @@
 package com.techlab.test.contact;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.techlab.contact.Contact;
+import com.techlab.contact.Database;
 
 public class TestContact {
 
-	public static void main(String[] args) throws IOException {
-		
-		
-		ArrayList<Contact> list = new ArrayList<Contact>();
-		String operation = "";
+	public static final int ADD_OPERATION = 1;
+	public static final int RETRIEVE_OPERATION = 2;
+	public static final int SEARCH_OPERATION = 3;
+
+	public static void main(String[] args) throws Exception {
+
+		ArrayList<Contact> contactList = null;
+		Database database = new Database();
+		contactList = database.readData();
+
 		for (int count = 1; count <= 100; count++) {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Enter the value");
 			System.out.println("1)Add Contact");
 			System.out.println("2)Retrieve Contact");
 			System.out.println("3)Search Contact");
-
 			int value = sc.nextInt();
-			if (value == 1) {
-				operation = "addContact";
-
-			} else if (value == 2) {
-				operation = "retrieveContact";
-			} else if (value == 3) {
-				operation = "searchContact";
-			}
+			int operation = value;
 
 			switch (operation) {
-			case "addContact":
-
-				addContact(list, null);
-
+			case ADD_OPERATION:
+				addContact(database, contactList);
 				break;
 
-			case "retrieveContact":
-
-				retrieveContact(list);
-
+			case RETRIEVE_OPERATION:
+				retrieveContact(database, contactList);
 				break;
 
-			case "searchContact":
-
-				searchContact(list);
+			case SEARCH_OPERATION:
+				searchContact(database, contactList);
 				break;
 
 			default:
@@ -59,39 +47,43 @@ public class TestContact {
 		}
 	}
 
-	public static void addContact(ArrayList<Contact> list,ObjectOutputStream out) throws IOException {
+	public static void addContact(Database data, ArrayList<Contact> contactList)
+			throws Exception {
+		contactList = new ArrayList<Contact>();
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Enter the name = ");
 		String name = scan.next();
 		System.out.println("Enter the number = ");
 		int number = scan.nextInt();
 		Contact c = new Contact(name, number);
-		writeData(c);
-		
-		
-		list.add(c);
+
+		contactList.addAll(data.readData());
+		contactList.add(c);
+		data.writeData(contactList);
+
 		System.out.println(c.getName() + " Contact added...");
 		System.out.println(" ");
 	}
 
-	public static void retrieveContact(ArrayList<Contact> list) {
-		
-		accessData();
-		for (Contact p : list) {
-			System.out.println("Name = " + p.getName() + "  " + "Number = "
+	public static void retrieveContact(Database data,
+			ArrayList<Contact> contactList) throws Exception {
+
+		for (Contact p : contactList) {
+			System.out.println("Name = " + p.getName() + "  Number = "
 					+ p.getNumber());
 		}
 		System.out.println(" ");
 	}
 
-	public static void searchContact(ArrayList<Contact> list) {
+	public static void searchContact(Database data,
+			ArrayList<Contact> contactList) throws Exception {
+
 		Scanner sc = new Scanner(System.in);
 		boolean isTrue = false;
 		System.out.println("Enter the name = ");
 		String searchName = sc.next();
 
-		for (Contact p : list) {
-
+		for (Contact p : contactList) {
 			if (p.getName().equals(searchName)) {
 				System.out.println("contact found ");
 				System.out.println("Name = " + p.getName() + " Number = "
@@ -101,7 +93,6 @@ public class TestContact {
 				return;
 			}
 		}
-
 		if (isTrue) {
 			System.out.println("Contact found");
 		} else {
@@ -109,41 +100,5 @@ public class TestContact {
 		}
 		System.out.println(" ");
 	}
-	
-	public static void writeData(Contact c) throws IOException
-	{
-		FileOutputStream fout = new FileOutputStream("X:\\Localcloudreposite\\OOP\\contact-app\\storedata.txt"); 
-		ObjectOutputStream out = new ObjectOutputStream(fout);
-		try{
-			out.writeObject(c);
-			out.flush();
-			System.out.println("Serialization is successful...");
-			}
-			catch(IOException ex)
-	        {
-	            System.out.println("IOException is caught");
-	        }
-	}
-	
-	public static void accessData()
-	{
-		try {
-			FileInputStream file = new FileInputStream(
-					"X:\\Localcloudreposite\\OOP\\contact-app\\storedata.txt");
-			ObjectInputStream in = new ObjectInputStream(file);
-			Contact s = (Contact) in.readObject();
-			System.out.println(s.getName() + " " + s.getNumber());
-
-			in.close();
-			//file.close();
-		} catch (IOException ex) {
-			System.out.println("IOException is caught");
-		}
-
-		catch (ClassNotFoundException ex) {
-			System.out.println("ClassNotFoundException is caught");
-		}
-	}
 
 }
-//X:\Localcloudreposite\OOP\contact-app
