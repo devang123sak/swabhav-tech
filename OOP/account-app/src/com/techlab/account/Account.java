@@ -52,4 +52,25 @@ public class Account {
 		}
 	}
 
+	@Override
+	public String toString() {
+		String displayData = "Account number = " + getAccNumber() + "\n"
+				+ "Name = " + getName() + "\n" + "Balance = " + getBalance();
+		return displayData;
+
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj == null)
+			return false;
+
+		if (((Account) obj).name == this.name
+				&& ((Account) obj).balance == this.balance)
+			return true;
+
+		return false;
+
+	}
 }
