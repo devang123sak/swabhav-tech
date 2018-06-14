@@ -10,7 +10,7 @@ public class ReadPropertiesFile {
 		Properties p = new Properties();
 
 		FileInputStream fin = new FileInputStream(
-				"X:\\Localcloudreposite\\OOP\\properties-app\\dataConfig.properties");
+				"properties-data/dataConfig.properties");
 		p.load(fin);
 		System.out.println(p.getProperty("userName"));
 		System.out.println(p.getProperty("password"));

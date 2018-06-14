@@ -11,11 +11,13 @@ public class WritePropertiesFile {
 		Properties p = new Properties();
 
 		FileOutputStream fout = new FileOutputStream(
-				"X:\\Localcloudreposite\\OOP\\properties-app\\dataConfig.properties");
+				"properties-data/dataConfig.properties");
 		ObjectOutputStream os = new ObjectOutputStream(fout);
 
 		p.setProperty("userName", "rajesh");
 		p.setProperty("password", "1324");
+		p.setProperty("password", "1324");
+		p.setProperty("url", "www.google.com");
 		p.store(os, null);
 		System.out.println("Success");
 	}

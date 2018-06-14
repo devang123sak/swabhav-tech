@@ -37,6 +37,8 @@ public class Student implements Comparable<Student> {
 		this.lastName = lastName;
 	}
 
+	// equals and hashCode method is override in hashSet to achieve
+	// required output.
 	@Override
 	public boolean equals(Object obj) {
 
@@ -50,6 +52,8 @@ public class Student implements Comparable<Student> {
 		return rollNumber;
 	}
 
+	// compareTo method is override in treeSet to achieve
+	// required output.
 	@Override
 	public int compareTo(Student student) {
 
@@ -60,4 +64,5 @@ public class Student implements Comparable<Student> {
 		}
 		return 1;
 	}
+
 }
