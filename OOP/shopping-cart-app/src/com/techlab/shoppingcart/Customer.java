@@ -1,5 +1,6 @@
 package com.techlab.shoppingcart;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,13 +8,13 @@ public class Customer {
 
 	private String customerName;
 	private String address;
-	private List<Order> order;
+	private List<Order> orderList;
 
-	public Customer(String customerName, String address, List<Order> order) {
+	public Customer(String customerName, String address) {
 		super();
 		this.customerName = customerName;
-		this.order = order;
 		this.address = address;
+		orderList = new ArrayList<Order>();
 	}
 
 	public String getCustomerName() {
@@ -25,20 +26,15 @@ public class Customer {
 	}
 
 	public List<Order> getOrder() {
-		return order;
+		return orderList;
 	}
 
-	public void placeOrder(List<Order> order) {
-
-		for(Order o:order)
-		{
-			System.out.println(o.getDate()+" "+o.calculateCheckOutPrice());
-		}
-
+	public void placeOrder(Order order) {
+		orderList.add(order);
 	}
 
 	public int numberOfOrder() {
-		int numberOfOrder = order.size();
+		int numberOfOrder = orderList.size();
 		return numberOfOrder;
 	}
 

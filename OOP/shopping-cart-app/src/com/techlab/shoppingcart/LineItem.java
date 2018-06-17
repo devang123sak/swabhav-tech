@@ -9,7 +9,8 @@ public class LineItem {
 
 	public LineItem(int quantity, Product product) {
 		super();
-		UUID uniqueKey = UUID.randomUUID();
+		UUID uniqueKey = UUID.randomUUID();// to generate uniqueValue for each
+											// id of LineItem
 		this.lineItemId = uniqueKey;
 		this.quantity = quantity;
 		this.product = product;
@@ -31,4 +32,12 @@ public class LineItem {
 		double finalAmount = (product.calculatePriceWithDiscount() * quantity);
 		return finalAmount;
 	}
+
+	@Override
+	public String toString() {
+		String data = "Product Name = " + product.getName() + "\tQuantity = "
+				+ this.getQuantity() + "\tPrice = " + product.getPrice() + "\n";
+		return data;
+	}
+
 }

@@ -10,8 +10,7 @@ public class Product {
 	private float discount;
 
 	public Product(String name, double price, float discount) {
-		UUID uniqueKey = UUID.randomUUID();
-		this.productId = uniqueKey;
+		this.productId = UUID.randomUUID();
 		this.name = name;
 		this.price = price;
 		this.discount = discount;
@@ -39,4 +38,5 @@ public class Product {
 		double amount = price - discountAmount;
 		return amount;
 	}
+
 }

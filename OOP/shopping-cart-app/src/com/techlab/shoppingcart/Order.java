@@ -1,27 +1,27 @@
 package com.techlab.shoppingcart;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 public class Order {
-	private String date;
+	private Date date;
 	private UUID orderId;
 	private List<LineItem> lineItem;
 
-	public Order(String date) {
+	public Order(Date date) {
 		super();
-		UUID uniqueKey = UUID.randomUUID();
-		this.orderId = uniqueKey;
+		this.orderId = UUID.randomUUID();
 		this.date = date;
-		this.lineItem = lineItem;
+		lineItem = new ArrayList<LineItem>();
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -33,16 +33,15 @@ public class Order {
 		return lineItem;
 	}
 
-	public void addToCart(List<LineItem> lineItem) {
-		if (!(lineItem == null)) {
-			lineItem.add((LineItem) this.getLineItem());
-		}
+	public void addToCart(LineItem item) {
+
+		lineItem.add(item);
 	}
 
 	public double calculateCheckOutPrice() {
 		double checkOutPrice = 0;
-		if (!(lineItem == null)) {
-			checkOutPrice = checkOutPrice;
+		for (LineItem i : lineItem) {
+			checkOutPrice = checkOutPrice + i.calculateItemWithQuantity();
 		}
 		return checkOutPrice;
 	}
