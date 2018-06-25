@@ -33,7 +33,7 @@ public class Inventory {
 		}
 		return null;
 	}
-/*
+
 	public List<Guitar> search(GuitarSpec searchSpec) {
 		List<Guitar> matchingGuitars = new LinkedList<Guitar>();
 		for (Iterator<Guitar> itr = inventory.iterator(); itr.hasNext();) {
@@ -54,17 +54,6 @@ public class Inventory {
 			}
 		}
 		return matchingmandolins;
-	}
-*/
-	public List search(InstrumentSpec searchSpec) {
-		List matchingInstrument = new LinkedList();
-		for (Iterator itr = inventory.iterator(); itr.hasNext();) {
-			Instrument instrument = (Instrument) itr.next();
-			if (Instrument.getSpec().matches(searchSpec)) {
-				matchingInstrument.add(instrument);
-			}
-		}
-		return matchingInstrument;
 	}
 
 }

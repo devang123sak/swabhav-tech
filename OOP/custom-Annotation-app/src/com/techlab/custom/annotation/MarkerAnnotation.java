@@ -18,6 +18,7 @@ public class MarkerAnnotation {
 
 			Method m = obj.getClass().getMethod("myMethod");
 
+			
 			// if the annotation is present
 			if (m.isAnnotationPresent(MyMarker.class))
 				System.out.println("MyMarker is present");
