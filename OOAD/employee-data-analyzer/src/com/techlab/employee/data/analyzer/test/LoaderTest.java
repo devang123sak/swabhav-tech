@@ -15,9 +15,11 @@ public class LoaderTest {
 	public static void main(String[] args) throws Exception, Exception {
 
 		DiskLoader diskLoader = new DiskLoader();
+		System.out.println("Data from Disk:");
 		System.out.println(diskLoader.loadData());
-		
-		WebLoader webLoader=new WebLoader();
+
+		WebLoader webLoader = new WebLoader();
+		System.out.println("Data from url:");
 		System.out.println(webLoader.loadData());
 	}
 

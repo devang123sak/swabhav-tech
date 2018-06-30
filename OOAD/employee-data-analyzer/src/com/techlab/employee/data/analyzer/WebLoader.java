@@ -1,10 +1,7 @@
 package com.techlab.employee.data.analyzer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.List;
 import java.util.Scanner;
 
 public class WebLoader implements ILoader {

@@ -68,10 +68,10 @@ public class Employee implements Comparable<Employee> {
 
 	@Override
 	public String toString() {
-		String data = this.employee_id + "\t" + this.employee_name + "\t"
-				+ this.employee_designation + "\t" + this.manager_id + "\t"
-				+ this.date_of_joining + "\t" + this.salary + "\t"
-				+ this.commission + "\t" + this.department_number + "\n";
+		String data = this.employee_id + " " + this.employee_name + " "
+				+ this.employee_designation + " " + this.manager_id + " "
+				+ this.date_of_joining + " " + this.salary + " "
+				+ this.commission + " " + this.department_number + "\n";
 		return data;
 	}
 
