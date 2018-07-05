@@ -47,15 +47,14 @@ public class Parsing {
 		}
 	}
 
-	public static Map<Integer, Employee> modifiedEmployeeList() throws Exception {
+	public static Map<Integer, Employee> modifiedEmployeeList()
+			throws Exception {
 
 		List<Employee> modifiedEmployeeData = new ArrayList<Employee>();
-		modifiedEmployeeData=convertingStringToList();
-		Map<Integer, Employee> hashMapList=new HashMap<Integer, Employee>();
-		for(Employee e:modifiedEmployeeData)
-		{
-			hashMapList.put( e.getEmployee_id(),e);
-			
+		modifiedEmployeeData = convertingStringToList();
+		Map<Integer, Employee> hashMapList = new HashMap<Integer, Employee>();
+		for (Employee e : modifiedEmployeeData) {
+			hashMapList.put(e.getEmployee_id(), e);
 		}
 		return hashMapList;
 

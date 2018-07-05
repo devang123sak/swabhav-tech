@@ -2,6 +2,7 @@ package com.techlab.employee.data.analyzer.test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import com.techlab.employee.data.analyzer.DataAnalyzer;
@@ -15,8 +16,9 @@ public class DataAnalyzerTest {
 
 		DataAnalyzer dataAnalyzer = new DataAnalyzer(new Parsing(
 				new DiskLoader()));
-		// printTotalEmployeesByDesignation(dataAnalyzer);
-		printTotalEmployeesByDept(dataAnalyzer);
+		 printTotalEmployeesByDesignation(dataAnalyzer);
+		// printTotalEmployeesByDept(dataAnalyzer);
+		//printMaxSalariedEmployee(dataAnalyzer);
 	}
 
 	public static void printTotalEmployeesByDesignation(
@@ -26,8 +28,9 @@ public class DataAnalyzerTest {
 
 		for (Entry<String, List<Employee>> m : totalEmployeesByDesignation
 				.entrySet()) {
-			System.out.println("Key = " + m.getKey() + "\t" + "value = "
-					+ m.getValue());
+			System.out.println("Key = " + m.getKey() + "\t"
+					+ "Number of Employee = " + m.getValue().size() + "\n"
+					+ "value = " + m.getValue());
 		}
 
 	}
@@ -39,9 +42,17 @@ public class DataAnalyzerTest {
 
 		for (Entry<Integer, List<Employee>> m : totalEmployeesByDesignation
 				.entrySet()) {
-			System.out.println("Key = " + m.getKey() + "\t" + "value = "
-					+ m.getValue());
+			System.out.println("Key = " + m.getKey() + "\t"
+					+ "Number of Employee = " + m.getValue().size() + "\n"
+					+ "value = " + m.getValue());
 		}
+	}
+
+	public static void printMaxSalariedEmployee(DataAnalyzer dataAnalyzer)
+			throws Exception {
+		Set<Employee> maxSalariedEmployee = dataAnalyzer.maxSalariedEmployee();
+		System.out.println(maxSalariedEmployee);
+
 	}
 
 }

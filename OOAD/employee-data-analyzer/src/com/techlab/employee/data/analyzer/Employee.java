@@ -56,6 +56,7 @@ public class Employee implements Comparable<Employee> {
 		return department_number;
 	}
 
+	// compareTo method used in treeSet
 	@Override
 	public int compareTo(Employee employee) {
 		if (this.salary == employee.salary) {

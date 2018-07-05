@@ -7,7 +7,7 @@ public class TaxCalculatorTest {
 
 	public static void main(String[] args) {
 
-		TaxCalculator calculator = new TaxCalculator(LogType.TXTLOGGER);
+		TaxCalculator calculator = new TaxCalculator(LogType.XMLLOGGER);
 		calculator.calculateTax(10, 0);
 	}
 
