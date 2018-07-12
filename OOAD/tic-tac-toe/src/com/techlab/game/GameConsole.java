@@ -7,22 +7,15 @@ public class GameConsole {
 	static Cell cell;
 	Game game;
 	Board board;
-//	static ResultAnalyzer resultAnalyzer;
 	Player player;
 
-	
-	GameState gameState;
-	
-	
 	public void startGame() {
 
 		cell = new Cell();
 		board = new Board();
 		player = new Player();
-		//boolean playing = true;
-		
-		
-		while (gameState.PLAYING != null) {
+		boolean playing = true;
+		while (playing) {
 			System.out.println(player.swicthPlayer());
 			inputFromUser();
 			board.printBoard(cell.getCell());

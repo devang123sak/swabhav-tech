@@ -7,7 +7,7 @@ import org.junit.Test;
 import com.techlab.game.ResultAnalyzer;
 
 public class ResultAnalyzerTest {
-	ResultAnalyzer resultAnalyzer = new ResultAnalyzer(null);
+	ResultAnalyzer resultAnalyzer = new ResultAnalyzer();
 
 	@Test
 	public void hasWonTest() {

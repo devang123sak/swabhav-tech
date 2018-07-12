@@ -29,7 +29,20 @@ public class Cell {
 
 	public static String[][] placeMark(int rowNumber, int colNumber,
 			String charValue) {
-		cell[rowNumber][colNumber] = charValue;
+
+		if (checkPlaceMark(getCell(), rowNumber, colNumber) == true)
+			cell[rowNumber][colNumber] = charValue;
 		return cell;
+	}
+
+	public static boolean checkPlaceMark(String[][] cell, int rowNumber,
+			int colNumber) {
+		if (cell[rowNumber][colNumber] == "x"
+				|| cell[rowNumber][colNumber] == "o") {
+			System.out.println("Mark is already present here");
+
+			return false;
+		}
+		return true;
 	}
 }

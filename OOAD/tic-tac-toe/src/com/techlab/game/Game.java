@@ -8,7 +8,6 @@ public class Game {
 		try {
 			resultAnalyzer.hasWon(cell.getCell(), Player.playerTurn);
 			resultAnalyzer.drawGame(cell.getCell());
-			resultAnalyzer.exitGame();
 		} catch (Exception e) {
 		}
 

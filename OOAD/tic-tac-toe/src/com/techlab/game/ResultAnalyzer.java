@@ -2,15 +2,8 @@ package com.techlab.game;
 
 public class ResultAnalyzer {
 	static Cell cell=new Cell();
-	String[][] cells= new String[3][3];
+	//String[][] cells= new String[3][3];
 
-	GameState gameState;
-
-	 public ResultAnalyzer(GameState gameState) {
-			super();
-			this.gameState = gameState;
-		}
-	
 	public static boolean hasWon(String[][] board, String player) {
 
 		// Check if the player has won by checking winning conditions.
@@ -24,8 +17,9 @@ public class ResultAnalyzer {
             board[2][0] == player && board[1][1] == player && board[0][2] == player) //   Diagonal      
         {
         	System.out.println("*******win "+player+"'s  Player...*******");
-            return true;
-            
+        	System.exit(0);
+        	return true;
+        	
         }
         else {
 
@@ -39,19 +33,11 @@ public class ResultAnalyzer {
 		if(cell.findEmptyCell(board)==0)
 		{
 			System.out.println("Game is draw");
+			System.exit(0);
 			return true;
 		}
 		 return false;
 	}
 		
-	public  void exitGame() {
-		
-		if(gameState==gameState.WIN)
-		{
-			System.exit(0);
-		}else if(drawGame(cell.getCell())==true)
-		{
-			System.exit(0);
-		}
-	}
+	
 }

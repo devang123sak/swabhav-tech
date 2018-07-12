@@ -35,4 +35,13 @@ public class CellTest {
 	}
 
 	
+	@Test
+	public void checkPlaceMarkTest() {
+	
+		boolean expected=true;
+		String[][] value={ { "x", "x", "o" }, { "x", "o", "x" },{ "x", "", "" } };
+		boolean actual=Cell.checkPlaceMark(value, 2, 2);
+		assertEquals(expected,actual);
+	}
+	
 }
