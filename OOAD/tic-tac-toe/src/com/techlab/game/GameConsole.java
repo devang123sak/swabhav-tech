@@ -4,29 +4,29 @@ import java.util.Scanner;
 
 public class GameConsole {
 
-	static Cell cell;
-	Game game;
-	Board board;
-	Player player;
+	public void startGame() throws CellAlreadyMarkException {
 
-	public void startGame() {
-
-		cell = new Cell();
-		board = new Board();
-		player = new Player();
+		Board board = new Board();
+		Player player = new Player();
+		Game game = new Game();
+		board.initializeCell();
 		boolean playing = true;
 		while (playing) {
 			System.out.println(player.swicthPlayer());
-			inputFromUser();
-			board.printBoard(cell.getCell());
-			game.checkCondition();
+			inputFromUser(board);
+
+			printdata(board);
+			game.checkCondition(board, player.playerTurn);
 			System.out.println(" ");
 
 		}
 	}
 
-	public static void inputFromUser() {
-		String charValue = null;
+	public static void inputFromUser(Board board)
+			throws CellAlreadyMarkException {
+		Mark charValue = null;
+		Mark mark = null;
+
 		Scanner scan = new Scanner(System.in);
 		try {
 			System.out.println("Enter row number:");
@@ -35,21 +35,33 @@ public class GameConsole {
 			int colNumber = scan.nextInt();
 
 			if (Player.playerTurn == "x") {
-				charValue = "x";
+				charValue = Mark.X;
 			} else {
-				charValue = "o";
+				charValue = Mark.O;
 			}
 
-			Cell.placeMark(rowNumber, colNumber, charValue);
+			board.setMark(rowNumber, colNumber, charValue);
 			System.out.println("(" + rowNumber + "," + colNumber + ")"
 					+ charValue);
 		} catch (Exception e) {
-			if (charValue == "x")
+			if (charValue.equals(Mark.X))
 				Player.playerTurn = "";
 			else
 				Player.playerTurn = "x";
-			System.out.println("Enter valid number");
 		}
+
 	}
 
+	public static void printdata(Board board) {
+		Cell[][] values = board.getAllCell();
+
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				System.out.print(" " + values[i][j] + "_|");
+
+			}
+			System.out.println("");
+		}
+		System.out.println("");
+	}
 }

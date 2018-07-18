@@ -1,16 +1,22 @@
 package com.techlab.game;
 
 public class Game {
-	private static ResultAnalyzer resultAnalyzer;
-	static Cell cell;
+	ResultAnalyzer resultAnalyzer = new ResultAnalyzer();
 
-	public static void checkCondition() {
+	public boolean checkCondition(Board board, String playerTurn) {
 		try {
-			resultAnalyzer.hasWon(cell.getCell(), Player.playerTurn);
-			resultAnalyzer.drawGame(cell.getCell());
+			boolean result = resultAnalyzer.win(board);
+			if (result == true) {
+				System.out.println("******  " + playerTurn
+						+ "'s Player win  ******");
+				System.exit(0);
+			} else if (board.isFull() == false) {
+				System.out.println("******  Match draw  ******");
+				System.exit(0);
+			}
 		} catch (Exception e) {
 		}
-
+		return false;
 	}
 
 }

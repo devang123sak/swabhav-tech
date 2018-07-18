@@ -1,48 +1,26 @@
 package com.techlab.game;
 
 public class Cell {
-	private static int row;
-	private static int column;
-	private static String[][] cell;
+
+	private Mark mark;
 
 	public Cell() {
-		cell = new String[3][3];
+		mark = mark.EMPTY;
 	}
 
-	public static String[][] getCell() {
-		return cell;
+	public Mark getMark() {
+		return this.mark;
 	}
 
-	public int findEmptyCell(String[][] cell) {
-
-		int emptyCellCount = 0;
-		for (row = 0; row < 3; row++) {
-			for (column = 0; column < 3; column++) {
-				if (cell[row][column] == "x" || cell[row][column] == "o") {
-				} else {
-					emptyCellCount++;
-				}
-			}
+	public void setMark(Mark mark) {
+		if (mark != mark.EMPTY) {
+			this.mark = mark;
 		}
-		return emptyCellCount;
 	}
 
-	public static String[][] placeMark(int rowNumber, int colNumber,
-			String charValue) {
-
-		if (checkPlaceMark(getCell(), rowNumber, colNumber) == true)
-			cell[rowNumber][colNumber] = charValue;
-		return cell;
+	@Override
+	public String toString() {
+		return this.mark.toString();
 	}
 
-	public static boolean checkPlaceMark(String[][] cell, int rowNumber,
-			int colNumber) {
-		if (cell[rowNumber][colNumber] == "x"
-				|| cell[rowNumber][colNumber] == "o") {
-			System.out.println("Mark is already present here");
-
-			return false;
-		}
-		return true;
-	}
 }

@@ -4,31 +4,24 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.techlab.game.Cell;
+import com.techlab.game.Mark;
 import com.techlab.game.ResultAnalyzer;
 
 public class ResultAnalyzerTest {
 	ResultAnalyzer resultAnalyzer = new ResultAnalyzer();
 
 	@Test
-	public void hasWonTest() {
+	public void winTest() {
 
 		boolean expected = true;
 
-		String[][] value = { { "x", "o", "o" }, { "o", "x", "o" },
-				{ "x", "o", "o" } };
-		boolean actual = resultAnalyzer.hasWon(value, "o");
-		assertEquals(expected, actual);
+		Mark[][] value = { { Mark.O,Mark.O, Mark.X }, { Mark.X, Mark.O, Mark.X },
+				{ Mark.X, Mark.X, Mark.O } };
+		
+	//	boolean actual = resultAnalyzer.win(value);
+		//assertEquals(expected, actual);
 	}
 
-	@Test
-	public void drawGameTest() {
-
-		boolean expected = true;
-		String[][] value = { { "x", "o", "o" }, { "x", "o", "x" },
-				{ "o", "x", "x" } };
-		boolean actual = resultAnalyzer.drawGame(value);
-
-		assertEquals(expected, actual);
-	}
 
 }
