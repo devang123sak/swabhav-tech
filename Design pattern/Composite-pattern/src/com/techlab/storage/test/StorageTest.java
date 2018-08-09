@@ -8,6 +8,7 @@ public class StorageTest {
 	public static StringBuffer compositeBuilder = new StringBuffer();
 
 	public static void main(String args[]) {
+		
 		Folder movie = new Folder(1, "Movies");
 		Folder movie1 = new Folder(2, "English Movies");
 		Folder movie2 = new Folder(3, "Hindi Movies");
@@ -21,10 +22,12 @@ public class StorageTest {
 		movie.add(file);
 		movie.add(movie1);
 		movie.add(movie2);
-		movie2.add(movie3);
 
 		movie1.add(file1);
+
+		movie2.add(movie3);
 		movie2.add(file2);
+
 		movie3.add(file3);
 
 		movie.showDetail();
