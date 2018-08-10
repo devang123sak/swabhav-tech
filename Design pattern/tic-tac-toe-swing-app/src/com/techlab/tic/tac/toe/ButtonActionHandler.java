@@ -5,16 +5,13 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 public class ButtonActionHandler implements ActionListener {
 
-	private JFrame buttonAction;
 	GameConsole gameConsole = new GameConsole();
 
 	public ButtonActionHandler(TicTacToeGui frame) {
-		this.buttonAction = frame;
+
 	}
 
 	@Override

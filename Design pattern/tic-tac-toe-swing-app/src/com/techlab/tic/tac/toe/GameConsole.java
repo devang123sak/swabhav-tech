@@ -1,5 +1,6 @@
 package com.techlab.tic.tac.toe;
 
+
 public class GameConsole {
 	Board board;
 	Player player;

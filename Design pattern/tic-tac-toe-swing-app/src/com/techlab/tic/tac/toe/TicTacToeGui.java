@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class TicTacToeGui extends JFrame {
@@ -77,14 +78,11 @@ public class TicTacToeGui extends JFrame {
 
 	public void displayPlayerInfo(String firstplayer, String secondPlayer) {
 
-		JLabel player1, player2, result, playerLabel1, playerLabel2;// ,
-																	// resultLabel;
+		JLabel player1, player2, result, playerLabel1, playerLabel2;
 		player1 = new JLabel("PLAYER 1: ");
 		player1.setBounds(800, 50, 100, 30);
 		player2 = new JLabel("PLAYER 2: ");
 		player2.setBounds(800, 100, 100, 30);
-		result = new JLabel("RESULT : ");
-		result.setBounds(800, 150, 100, 30);
 
 		playerLabel1 = new JLabel(firstplayer);
 		playerLabel1.setBounds(860, 50, 150, 30);
@@ -99,18 +97,20 @@ public class TicTacToeGui extends JFrame {
 
 		this.add(player1);
 		this.add(player2);
-		this.add(result);
 		this.setLayout(null);
 		this.setVisible(true);
 
 	}
 
 	public void displayResultLabel(String playerTurn) {
-		System.out.println("hi");
-		resultLabel = new JLabel(playerTurn);
-		resultLabel.setBounds(870, 150, 150, 30);
-		this.add(resultLabel);
-		resultLabel.setVisible(true);
+		if (playerTurn == "x") {
+			JOptionPane.showMessageDialog(this, "PLAYER 1 WIN");
+		} else if (playerTurn == "o") {
+			JOptionPane.showMessageDialog(this, "PLAYER 2 WIN");
+		} else if (playerTurn == "Draw") {
+			JOptionPane.showMessageDialog(this, "DRAW");
+		}
+
 	}
 
 	public void displayButtons(ButtonActionHandler buttonActionHandler) {
