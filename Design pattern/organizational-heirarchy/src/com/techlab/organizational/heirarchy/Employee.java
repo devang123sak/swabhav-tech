@@ -1,5 +1,8 @@
 package com.techlab.organizational.heirarchy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Employee {
 
 	private int employee_id;
@@ -121,7 +124,7 @@ public class Employee {
 		String data = this.employee_id + " " + this.employee_name + " "
 				+ this.employe_designation + " " + this.manager_id + " "
 				+ this.date_of_joining + " " + this.salary + " "
-				+ this.commission + " " + this.department_number + "\n";
+				+ this.commission + " " + this.department_number;
 		return data;
 	}
 
