@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swabhavtechlab">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task </title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+    <div ng-controller="taskController">
+        <form ng-submit="submit()" ng-controller="taskController">
+            <h1>Task : <input type="text" ng-model="inputText" size="50" placeholder="Add New Task">
+                <button ng-click="addTask()">ADD</button> </h1>
+
+            <h3>
+                <h1 ng-repeat="x in data track by $index">{{x}}</h1>
+
+            </h3>
+        </form>
+    </div>
+
+    <script>
+        angular.module('swabhavtechlab', []).controller('taskController', function ($scope) {
+            $scope.data = [];
+            $scope.addTask = function () {
+                $scope.data.push($scope.inputText);
+                $scope.inputText = "";
+            }
+            $scope.submit = function () {
+                $scope.addTask();
+            }
+        })
+
+    </script>
+</body>
+
+</html>

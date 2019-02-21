@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <title>
+        NUMBER API
+    </title>
+</head>
+
+<body>
+    <p>
+       ******* Enter Number between 1 to 10 *******
+    </p>
+    <input type="text" id="searchTxt">
+    <button onclick="search()">SEARCH</button>
+    <div id="div1"></div>
+    <script>
+        var i = 0;
+        var saveToServer = [];
+        var xmlData = [];
+        var parentDiv = document.getElementById("div1");
+
+        if (!(localStorage.length == 0)) {
+            retriveDataFromServer();
+            displayData();
+        }
+
+        function search() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var obj = JSON.parse(xhttp.response);
+                    xmlData = obj;
+                    getData();
+                }
+            };
+            xhttp.open("GET", "number.json", true);
+            xhttp.send();
+        }
+
+        function getData() {
+            var searchNumber = document.getElementById("searchTxt").value;
+            var txtContent = xmlData[searchNumber];
+            createList(txtContent, searchNumber);
+            var obj = { "id": txtContent, "key": searchNumber };
+            saveToServer.push(obj);
+            saveDataToServer();
+        }
+
+        function createList(txtContent, searchNumber) {
+            var newUl = document.createElement("ul");
+            newUl.setAttribute("id", "ul");
+            var newLi = document.createElement("li");
+            newLi.setAttribute("id", "li1");
+            changeTextColor(newLi, newUl, txtContent, searchNumber);
+        }
+
+        function changeTextColor(newLi, newUl, txtContent, searchNumber) {
+            var ul = document.getElementById("ul");
+            var li = document.getElementById("li1");
+            newLi.textContent = txtContent;
+
+            var remainder = searchNumber % 2;
+            if (remainder == 0) {
+                newLi.style.color = "green";
+            } else {
+                newLi.style.color = "blue";
+            }
+            addData(newLi, newUl, li);
+        }
+
+        function addData(newLi, newUl, li) {
+            if (i == 0) {
+                newUl.append(newLi);
+                parentDiv.append(newUl);
+                i++;
+            } else {
+                ul.insertBefore(newLi, li);
+            }
+        }
+
+        function saveDataToServer() {
+            var stringData = JSON.stringify(saveToServer);
+            localStorage.setItem("numberApi", stringData);
+        }
+
+        function retriveDataFromServer() {
+            var retriveData = JSON.parse(localStorage.getItem("numberApi"));
+            saveToServer = retriveData;
+        }
+
+        function displayData() {
+            for (var i = 0; i < saveToServer.length; i++) {
+                var id = saveToServer[i].id;
+                var key = saveToServer[i].key;
+                createList(id, key);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

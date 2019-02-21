@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="toggle">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TOGGLE</title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+    <div ng-controller="toggleController">
+        <button ng-click="showImage()">Toggle</button>
+        <div ng-hide="imageToggle">
+            <p><img ng-src="{{image.pic}}"></p>
+        </div>
+
+    </div>
+
+    <script>
+        angular.module('toggle', []).
+            controller('toggleController', function ($scope) {
+                console.log($scope);
+                $scope.imageToggle = true;
+                console.log("inside controller");
+                $scope.showImage = function () {
+
+                    $scope.image = { pic: "giphy.gif" }
+
+                    if ($scope.imageToggle == true) {
+                        $scope.imageToggle = false;
+                    } else {
+                        $scope.imageToggle = true;
+                    }
+
+                }
+            })    
+    </script>
+
+
+</body>
+
+</html>

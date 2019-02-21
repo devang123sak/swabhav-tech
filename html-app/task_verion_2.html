@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Add New Option</title>
+
+  <style>
+    div {
+    color: red;
+   text-align: center;
+   font-size: 150%;
+    }
+
+   button{
+   font-size: 90%;
+   }
+   
+   li{
+   text-align: center;
+   }
+ </style>
+
+</head>
+
+<body bgcolor="#b3ffff">
+  <div>
+    <center><img src="taskImage.png" style="width:300px" align="middle"></center> <br>
+    <p>Task Name:
+      <input type="text" id="txtVal">
+      <button id="add" onclick="add()">Add</button></p>
+    <ul id="list"></ul>
+  </div>
+
+  <script>
+    var data = [];
+    var liNode;
+    var initialLiValue = 0;
+    var initialBtnValue = 0;
+
+    if (!(localStorage.length == 0)) {
+      retriveData();
+      display();
+      console.log("excute");
+    }
+
+    txtVal.addEventListener("keyup", function (event) {
+      event.preventDefault();
+      if (event.keyCode === 13) {
+        document.getElementById("add").click();
+      }
+    });
+
+    function add() {
+      var txtVal = document.getElementById("txtVal").value;
+      createList(txtVal);
+      data.push(txtVal);
+      buttonCreate();
+      storeDataToserver();
+      // location.reload();
+    }
+
+    function createList(txtVal) {
+      var listNode = document.getElementById("list");
+      liNode = document.createElement("LI");
+      var txtNode = document.createTextNode(txtVal);
+      liNode = setId(liNode, initialLiValue);
+      initialLiValue++;
+      liNode.appendChild(txtNode);
+      listNode.appendChild(liNode);
+    }
+
+    function buttonCreate() {
+      var list = document.getElementById("list");
+      var button1 = document.createElement("button");
+      var button2 = document.createElement("button");
+      var button1Name = document.createTextNode("done");
+      var button2Name = document.createTextNode("remove");
+
+      button1 = setId(button1, initialBtnValue);
+      button2 = setId(button2, initialBtnValue);
+      initialBtnValue++;
+
+      button1.append(button1Name);
+      button2.append(button2Name);
+      liNode.append(button1);
+      liNode.append(button2);
+
+      button1.addEventListener("click", buttonClick);
+      button2.addEventListener("click", buttonClick);
+    }
+
+    function setId(element, initialValue) {
+      element.setAttribute("id", "id" + initialValue);
+      return element;
+    }
+
+    function buttonClick(e) {
+      if (e.srcElement.innerHTML == "done") {
+        clickDone(e);
+        //  location.reload(); 
+      } else if (e.srcElement.innerHTML == "remove") {
+        clickRemove(e);
+        location.reload();
+      }
+    }
+
+    function clickDone(e) {
+      var idValue = obtainId(e);
+      var getId = document.getElementById(idValue).innerHTML;
+      var result = getId.strike();
+      document.getElementById(idValue).innerHTML = result;
+    }
+
+    function clickRemove(e) {
+      var idValue = obtainId(e);
+      var str = document.getElementById(idValue).innerText;
+      var a = data.indexOf(str);
+      data.splice(a, 1);
+      document.getElementById(idValue).remove();
+      removeValueFromStorage(str);
+      location.reload();
+    }
+
+    function obtainId(e) {
+      var value;
+      for (var i = 0; i < data.length; i++) {
+        var idValue = "id" + i;
+        console.log(value);
+        value = checkId(value, idValue, e);
+      }
+      console.log(value);
+      return value;
+    }
+
+    function checkId(value, idValue, e) {
+      var getId = value;
+      if (idValue == e.srcElement.id) {
+        getId = idValue;
+      }
+      return getId;
+    }
+
+    function storeDataToserver() {
+      var stringData = JSON.stringify(data);
+      localStorage.setItem("storeData", stringData);
+    }
+
+    function retriveData() {
+      var items = JSON.parse(localStorage.getItem("storeData"));
+      data = items;
+    }
+
+    function removeValueFromStorage(str) {
+      retriveData();
+      var a = data.indexOf(str);
+      data.splice((a + 1), 1);
+      storeDataToserver();
+    }
+
+    function strikeStn(getId, result) {
+
+      var a = data.indexOf(getId);
+      data[a] = result;
+      storeDataToserver();
+
+    }
+
+    function display() {
+
+      retriveData();
+      for (var i = 0; i < data.length; i++) {
+
+        createList(data[i]);
+        buttonCreate();
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<section id="editStudentForm">
+
+    <form id="form" data-toggle="validator" name="studentForm">
+
+        <div class="form-group">
+            <label for="exampleInputNumber">Roll Number</label>
+            <input type="rollNumber" min="0" class="form-control" id="inputRollNumber" ng-model="inputRollNumber"
+                placeholder="Enter Roll Number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputName">Name</label>
+            <input type="name" class="form-control" id="inputName" ng-model="inputName" placeholder="Enter Name"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail">Email Id</label>
+            <input type="email" class="form-control" id="inputEmail" ng-model="inputEmail" placeholder="Enter Email Id"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputAge">Age</label>
+            <input type="age" class="form-control" id="inputAge" ng-model="inputAge" placeholder="Enter Age in years"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputDate">Date</label>
+            <input type="date" class="form-control" id="inputDate" ng-model="inputDate" placeholder="Enter Date date"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputGender">Gender</label>
+            <input type="radio" name="gender" ng-model="result" ng-value="true" value="1" id="Male" required>
+            Male<input type="radio" name="gender" ng-model="result" ng-value="false" value="2" id="Female"
+                required>Female
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class=" btn btn-info" id="submit" ng-disabled="studentForm.$invalid"
+                ng-click="updateData()">UPDATE</button>
+        </div>
+
+    </form>
+</section>

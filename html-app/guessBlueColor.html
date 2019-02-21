@@ -1,0 +1,178 @@
+<html>
+
+<head>
+    <title>
+        Game
+    </title>
+    <style>
+        #p1 {
+            text-align: center;
+            margin-top: 10%;
+            font-size: 400%;
+        }
+
+        #start {
+            margin-left: 44%;
+            font-size: 300%;
+            border-width: 10px;
+        }
+
+        div {
+            margin-left: 40%;
+            font-size: 100%;
+
+        }
+    </style>
+</head>
+
+<body bgcolor="#e6b3e6">
+    <p id="p7" style="text-align: center"></p>
+    <p id="p1">Start Game</p>
+
+    <button id="start" onclick="gameStart()">START</button>
+    <div id="div2" style="margin-left: -20%; margin-top: -20%;"></div>
+    <div id="div1" style="margin-top: 25%;">
+        <p id="p2">
+            <li>Find the Blue Button</li>
+            <li>3 wrong attempt game will be over</li>
+        </p>
+    </div>
+    <div id="div2" style="margin-left: -20%; margin-top: -20%;"></div>
+
+    <p id="p3" style="text-align: center "></p>
+    <p id="p4" style="text-align: center"></p>
+    <p id="p5" style="text-align: center"></p>
+    <button id="resetBtn" style="visibility: hidden; margin-left: 45%;" onclick="resetPage()">Reset</button>
+
+    <script>
+        var numberValue = 0;
+        var count = 0;
+        var attempt = 0;
+        var intervalForTotalTime;
+        var seconds = 0;
+        var val = 1;
+
+        function gameStart() {
+            document.getElementById("p1").style.visibility = "hidden";
+            document.getElementById("div1").style.visibility = "hidden";
+            document.getElementById("start").style.visibility = "hidden";
+
+            createButton();
+            var number = randonNumberGenerate();
+            document.getElementById("p5").innerHTML = "Random Number = " + number;
+            intervalForTotalTime = setInterval(totalGameTime, 1000);
+        }
+
+        function totalGameTime() {
+            seconds++;
+            document.getElementById("p7").innerHTML = "Total Time = " + seconds + "sec";
+        }
+
+        function createButton() {
+            var div2 = document.getElementById("div2");
+            createRow(div2);
+        }
+
+        function createRow(div2) {
+            for (var i = 1; i <= 5; i++) {
+                var dynDiv = document.createElement("div");
+                dynDiv.id = "divDyna";
+                dynDiv.style.height = "40px";
+                dynDiv.style.width = "1000px";
+                div2.appendChild(dynDiv);
+
+                createCol(dynDiv);
+            }
+        }
+
+        function createCol(dynDiv) {
+            for (var j = 1; j <= 10; j++) {
+                var button = document.createElement("button");
+                // var buttonName = document.createTextNode(val);
+                button.setAttribute("id", "id" + val);
+                setButtonTxt(button);
+                button.style.margin = "10px 10px";
+                dynDiv.append(button);
+                //  button.append(buttonName);
+                button.addEventListener("click", checkButton);
+                val = val + 1;
+            }
+        }
+
+        function setButtonTxt(button) {
+            var buttonName;
+            if (val < 10) {
+                buttonName = document.createTextNode("0" + val);
+            } else {
+                buttonName = document.createTextNode(val);
+            }
+            button.append(buttonName);
+        }
+
+        function randonNumberGenerate() {
+            var randomValue = Math.floor((Math.random() * 50) + 1);
+            numberValue = randomValue;
+            return randomValue;
+        }
+
+        function checkButton(e) {
+            if (count < 2) {
+                var idHold = "id" + numberValue;
+                checkId(idHold, e);
+            } else {
+                count++;
+                displayResult();
+                wrongClick(e, numberValue);
+                document.getElementById("resetBtn").style.visibility = "visible";
+                disableBtnClick();
+                setTimeout(function () { alert("GEME OVER"); }, 1000);
+                clearTimeout(intervalForTotalTime);
+            }
+        }
+
+        function checkId(idHold, e) {
+            if (idHold == e.srcElement.id) {
+                correctButtonClick(idHold);
+                attempt++;
+                location.reload;
+                displayResult();
+            } else {
+                count++;
+                wrongClick(e, numberValue);
+                location.reload;
+                displayResult();
+            }
+        }
+
+        function correctButtonClick(idHold) {
+            document.getElementById(idHold).style.backgroundColor = "#0000ff";
+        }
+
+        function wrongClick(e, numberValue) {
+            var value = document.getElementById(e.srcElement.id).innerHTML;
+            if (value < numberValue) {
+                document.getElementById(e.srcElement.id).style.backgroundColor = "#00ff00";
+            } else {
+                document.getElementById(e.srcElement.id).style.backgroundColor = "#ff0000";
+            }
+        }
+
+        function displayResult() {
+            document.getElementById("p4").innerHTML = "YOUR SCORE = " + attempt;
+            document.getElementById("p5").innerHTML = "COUNT = " + count;
+        }
+
+        function resetPage() {
+            location.reload();
+        }
+
+        function disableBtnClick() {
+            for (var i = 1; i <= 50; i++) {
+                document.getElementById("id" + i).disabled = true;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

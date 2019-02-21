@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swabhavtechlab">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>hierarchy Display</title>
+    <script src="angular.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body>
+    <div ng-controller="studentController">
+        <form id="form" data-toggle="validator">
+
+            <div class="form-group">
+                <label for="exampleInputNumber">Roll Number</label>
+                <input type="rollNumber" min="0" class="form-control" id="inputRollNumber" ng-model="inputRollNumber"
+                    placeholder="Enter Roll Number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputName">Name</label>
+                <input type="name" class="form-control" id="inputName" ng-model="inputName" placeholder="Enter Name"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputEmail">Email Id</label>
+                <input type="email" class="form-control" id="inputEmail" ng-model="inputEmail"
+                    placeholder="Enter Email Id" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputAge">Age</label>
+                <input type="age" class="form-control" id="inputAge" ng-model="inputAge"
+                    placeholder="Enter Age in years" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputDate">Date</label>
+                <input type="date" class="form-control" id="inputDate" ng-model="inputDate"
+                    placeholder="Enter Date date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputGender">Gender</label>
+                <input type="radio" name="gender" ng-model="result" ng-value="true" value="male" id="Male"> Male<input
+                    type="radio" name="gender" value="female" ng-model="result" ng-value="false" id="Female">Female
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class=" btn btn-info" id="submit" ng-click="addStudentData()">Submit</button>
+            </div>
+
+        </form>
+
+        <hr>
+        <button ng-click="showStudentData()" class="btn btn-warning">Show Data</button>
+
+        <table id="table" ng-hide="tableToggle" class="table table-striped">
+            <tr>
+                <th> Roll number</th>
+                <th>Student Name</th>
+                <th>Age</th>
+                <th>Email </th>
+                <th>Date of Birth</th>
+                <th>IS Male</th>
+            </tr>
+            <tbody ng-repeat="student  in studentdata ">
+                <tr>
+                    <td>{{student.rollNo}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.age}}</td>
+                    <td>{{student.email}}</td>
+                    <td>{{student.date|date:'short'}}</td>
+                    <td>{{student.isMale}}</td>
+                    <td> <button type="submit" id="{{student.id}}" class='btn btn-danger' ng-click="deleteData($event)">
+                            Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+    </div>
+
+    <script>
+        angular.module("swabhavtechlab", []).factory("studentServices", ["$log", "$q", "$http", function ($log, $q, $http) {
+            console.log("inside service");
+            var obj = {};
+
+            obj.getStudentList = function () {
+                return $q(function (resolve, reject) {
+                    $http.get('http://gsmktg.azurewebsites.net/api/v1/techlabs/test/students/').then(function (response) {
+
+                        if (response.status == 200) {
+                            console.log(response.data);
+                            resolve(response.data);
+                        } else {
+                            reject("errroe obtained");
+                        }
+                    });
+                })
+            }
+
+            obj.postStudentList = function (student) {
+                console.log(student);
+                $http.post("http://gsmktg.azurewebsites.net/api/v1/techlabs/test/students/",
+                    {
+                        "id": student.id,
+                        "name": student.name,
+                        "rollNo": student.rollNo,
+                        "age": student.age,
+                        "email": student.email,
+                        "date": student.date,
+                        "isMale": student.isMale,
+                    },
+                    function (data, status) {
+                        alert("Data: " + data + "\nStatus: " + status);
+                    });
+            }
+
+            obj.deleteStudentData = function (studentId) {
+
+                $http.delete("http://gsmktg.azurewebsites.net/api/v1/techlabs/test/students/" + studentId).then(function (response) {
+                    console.log("");
+                }).catch(function (reject) {
+                    console.log("");
+                });
+
+            }
+
+            return obj;
+        }]).controller("studentController", ["$scope", "studentServices", function ($scope, studentServices) {
+            studentServices.getStudentList().then((empList) => {
+                console.log("excute resolve");
+                $scope.studentdata = empList;
+
+                $scope.tableToggle = true;
+                $scope.showStudentData = function () {
+                    if ($scope.tableToggle == true) {
+                        $scope.tableToggle = false;
+                    } else {
+                        $scope.tableToggle = true;
+                    }
+                }
+
+                $scope.addStudentData = function () {
+                    var studentObj = {
+                        id: $scope.create_UUID,
+                        name: $scope.inputName,
+                        rollNo: $scope.inputRollNumber,
+                        age: $scope.inputAge,
+                        email: $scope.inputEmail,
+                        date: $scope.inputDate,
+                        isMale: $scope.getGender(),
+                    }
+                    console.log(studentObj);
+                    studentServices.postStudentList(studentObj);
+                    $scope.showStudentData();
+
+                }
+
+              /*  $scope.create_UUID = function () {
+                    var dt = new Date().getTime();
+                    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                        var r = (dt + Math.random() * 16) % 16 | 0;
+                        dt = Math.floor(dt / 16);
+                        return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+                    });
+                    return uuid;
+                }*/
+
+                $scope.getGender = function () {
+                    if ($scope.result) {
+                        console.log("male");
+                        gender = true;
+                    } else {
+                        console.log("female");
+                        gender = false;
+                    }
+                    return gender;
+                }
+
+                $scope.deleteData = function (event) {
+                    //  console.log(event.target.id);
+                    //$scope.showStudentData();
+                    if (confirm("CONFIRM")) {
+                        studentServices.deleteStudentData(event.target.id);
+                        alert("Data is Deleted");
+                    }
+                   // location.reload(); 
+                    $scope.showStudentData();
+                }
+
+                $scope.displayData = function () {
+                    $location.reload(); 
+                    $scope.showStudentData();
+                }
+
+            }).catch((e) => {
+                console.log(e);
+            })
+
+        }])
+
+    </script>
+</body>
+
+</html>

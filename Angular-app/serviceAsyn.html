@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swabhavtechlab">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Service Asynchronous</title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+    <div ng-controller="firstController">
+        <form ng-submit="submit()" ng-controller="firstController">
+            Enter value : <input type="text" ng-model="value" ng-style="{'background-color':color}">
+        </form>
+    </div>
+    <script>
+        angular.module('swabhavtechlab', []).factory("mathsServices", ["$log", "$q", function ($log, $q) {
+            $log.info("inside the Service");
+
+            var obj = {}
+
+
+            obj.checkEven = function (number) {
+                return $q(function (resolve, reject) {
+                    if (number % 2 == 0) {
+                        console.log("excute resolve");
+                        resolve("Green");
+                    }
+                    else {
+                        console.log("excute reject");
+                        reject("red");
+                    }
+                })
+            }
+            return obj;
+
+        }]).controller("firstController", ["$scope", "mathsServices", function ($scope, mathsServices) {
+            $scope.submit = function () {
+                var number = $scope.value;
+                mathsServices.checkEven(number)
+                    .then((r) => {
+                        console.log(r);
+                        $scope.color = "green";
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                        $scope.color = "red";
+                    })
+            }
+        }])
+    </script>
+</body>
+
+</html>

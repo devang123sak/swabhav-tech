@@ -1,0 +1,177 @@
+<html>
+
+<head>
+    <title>
+        Game
+    </title>
+
+    <script src="JQuery.js"></script>
+    <style>
+        div {
+            margin-left: 35%;
+            font-size: 100%;
+        }
+
+        #header {
+            text-align: center;
+            font-size: 300%;
+        }
+
+        #startBtn {
+            margin-left: 44%;
+            font-size: 300%;
+        }
+    </style>
+
+</head>
+
+<body bgcolor="#e6b3e6">
+    <p id="totalTime" style="text-align: center"></p>
+    <p id="header">Start Game</p>
+
+    <button id="startBtn">START</button>
+    <div id="showBtnDiv"></div>
+    <div id="rulesDiv">
+        <p id="p2">
+            <li>Find the Blue Button</li>
+            <li>3 wrong attempt game will be over</li>
+        </p>
+    </div>
+
+    <p id="randomNumber" style="text-align: center "></p>
+    <p id="score" style="text-align: center"></p>
+    <p id="count" style="text-align: center"></p>
+
+    <script>
+        (function () {
+            var numberValue = 0;
+            var count = 0;
+            var attempt = 0;
+            var intervalForTotalTime;
+            var seconds = 0;
+            var val = 1;
+
+
+            $(document).ready(function () {
+                $("#startBtn").click(function () {
+                    $("#header").hide();
+                    $("#rulesDiv").hide();
+                    $("#startBtn").hide();
+                    createButton();
+                    displayRandomNumber();
+                    intervalForTotalTime = setInterval(totalGameTime, 1000);
+                });
+            });
+
+            function totalGameTime() {
+                seconds++;
+                $("#totalTime").text("Total Time = " + seconds + "sec");
+            }
+
+            function displayRandomNumber() {
+                var number = randonNumberGenerate();
+                $("#randomNumber").text("Random Number = " + number);
+            }
+
+            function createButton() {
+                var showBtnDiv = document.getElementById("showBtnDiv");
+                createRow();
+            }
+
+            function createRow() {
+                for (var i = 1; i <= 5; i++) {
+                    $("#showBtnDiv").append("<div>" + "</div>");
+                    $("#showBtnDiv").append(createCol());
+                }
+            }
+
+            function createCol() {
+                for (var j = 1; j <= 10; j++) {
+                    $("#showBtnDiv").append("<button id=id" + val + " style='margin : 10px 10px'" + ">" + "</button>");
+                    $("#id" + val).click(function () {
+                        checkButton(this);
+                    });
+                    setButtonTxt("id" + val);
+                    val = val + 1;
+                }
+            }
+
+            function setButtonTxt(e) {
+                if (val < 10) {
+                    $("#" + e).text("0" + val);
+                } else {
+                    $("#" + e).text(val);
+                }
+            }
+
+            function randonNumberGenerate() {
+                var randomValue = Math.floor((Math.random() * 50) + 1);
+                numberValue = randomValue;
+                return randomValue;
+            }
+
+            function checkButton(e) {
+                var randomId = "id" + numberValue;
+                var clickId = $(e).attr("id");
+                if (count < 2) {
+                    checkId(randomId, clickId);
+                } else {
+                    count++;
+                    displayResult();
+                    wrongClick(clickId, numberValue);
+                    disableBtnClick();
+                    setTimeout(function () { alert("GEME OVER"); }, 1000);
+                    createResetBtn();
+                }
+            }
+
+            function checkId(randomId, clickId) {
+                if (randomId == clickId) {
+                    $("#" + randomId).css("background-color", "#0000ff");
+                    attempt++;
+                    showData();
+                } else {
+                    count++;
+                    wrongClick(clickId, numberValue);
+                    showData();
+                }
+            }
+
+            function showData() {
+                $("body").load;
+                displayRandomNumber();
+                displayResult();
+            }
+
+            function wrongClick(clickId, numberValue) {
+                var value = $("#" + clickId).text();
+                if (value < numberValue) {
+                    $("#id" + value).css("background-color", "#00ff00");
+                } else {
+                    $("#id" + value).css("background-color", "#ff0000");
+                }
+            }
+
+            function displayResult() {
+                $("#score").text("YOUR SCORE = " + attempt);
+                $("#count").text("COUNT = " + count);
+            }
+
+            function disableBtnClick() {
+                for (var i = 1; i <= 50; i++) {
+                    $("#id" + i).prop("disabled", true);
+                }
+            }
+
+            function createResetBtn() {
+                $("#count").append("<button id='resetBtn'>" + "RESET" + "</button>");
+                $("#resetBtn").click(function () {
+                    location.reload(true);
+                })
+            }
+        })();
+
+    </script>
+</body>
+
+</html>

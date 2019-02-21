@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>
+        Color With Button
+    </title>
+    <style>
+       div{
+            margin-left: 45%;
+            margin-top: 20%;;
+        }
+    </style>
+</head>
+
+<body>
+<div >
+    <select id="colorOption" >
+        <option id="red">red</option>
+        <option id="blue">blue</option>
+        <option id="green">green</option>
+
+    </select>
+    <button onclick="selectColor()">Set</button>
+</div>
+
+    <script>
+        function selectColor() {
+            var selectedValue = document.getElementById("colorOption").value;
+            console.log(selectedValue);
+            if (selectedValue == "red") {
+                document.body.style.backgroundColor = "red";
+            } else if (selectedValue == "blue") {
+                document.body.style.backgroundColor = "blue";
+            } else if (selectedValue == "green") {
+                document.body.style.backgroundColor = "green";
+            }
+
+        }
+    </script>
+</body>
+
+</html>

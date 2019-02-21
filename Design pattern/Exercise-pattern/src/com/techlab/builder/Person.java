@@ -30,7 +30,7 @@ public class Person {
 				+ "\n father Name:" + this.fathersName + "\n last Name:"
 				+ this.lastName + "\n Age:" + this.age + "\n mother Name:"
 				+ this.mothersName + "\n height:" + this.height + "\n weight: "
-				+ this.weight;
+				+ this.weight+"\n\n";
 	}
 
 	public static class Builder {

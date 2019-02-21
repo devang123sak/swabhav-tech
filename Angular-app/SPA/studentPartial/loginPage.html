@@ -1,0 +1,21 @@
+<section id="loginPage">
+
+    <form id="loginPageForm" name="loginPageForm">
+
+        <div class="form-group" style="margin-left: 50px">
+            <h3> User ID : </h3>
+            <input type="text" class="form-control" id="inputUserId" ng-model="inputUserId" placeholder="Enter User ID"
+                required>
+        </div>
+        <div class="form-group" style="margin-left: 50px">
+            <h3>PassWord :</h3> <input type="password" class="form-control" id="inputPassword" ng-model="inputPassword"
+                placeholder="Enter Password" required>
+        </div>
+        <br>
+        <div class="form-group" style="margin-left: 50px">
+            <button type="submit" class=" btn btn-primary" id="submit" ng-disabled="loginPageForm.$invalid"
+                ng-click="login()">LOGIN</button>
+        </div>
+
+    </form>
+</section>

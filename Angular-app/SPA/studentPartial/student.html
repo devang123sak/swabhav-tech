@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="swabhav-techLab">
+
+<head>
+
+    <title> Student Page</title>
+    <script src="../angular.js"></script>
+    <script src="../route.js"></script>
+    <script src="app.js"></script>
+    <script src="studentController.js"></script>
+    <link rel="stylesheet" href="../../css/bootstrap.css">
+    <style>
+        #inputPassword,
+        #inputUserId {
+            width: 300px;
+        }
+
+        #loginPageForm {
+            margin-left: 550px;
+            margin-top: 80px;
+            width: 400px;
+            height: 300px;
+            box-sizing: border-box;
+            border: 2px solid tomato;
+            border-radius: 25px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- <a href="#/studentForm">Student Form</a>
+    <a href="#/display">Display</a> -->
+   <div header></div>
+    <br>
+    <article ng-view>
+    </article>
+    <div footer></div>
+
+</body>
+
+</html>

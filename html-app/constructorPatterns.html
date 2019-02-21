@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>
+        constructor patterns
+    </title>
+</head>
+
+<body>
+    <script>
+
+        function Account(accountNumber, balance) {
+            var _balance;
+
+            this.deposite = function (value) {
+                _balance = balance + value;
+            };
+
+            this.withdraw = function (value) {
+                _balance = balance - value;
+            };
+
+            this.balance = function () {
+                return "Balance = " + _balance;
+            };
+
+            this.getAccountNumber = function () {
+                return "Account Number = " + accountNumber;
+            }
+        }
+
+        var acc = new Account(1123, 2000);
+        acc.deposite(1000);
+        console.log(acc.getAccountNumber());
+        console.log(acc.balance());
+        console.log(acc);
+
+        var acc1 = new Account(321, 1000);
+        acc1.deposite(500);
+        console.log(acc1.getAccountNumber());
+        console.log(acc1.balance());
+
+        var acc2 = new Account(789, 5000);
+        acc2.withdraw(1000);
+        console.log(acc2.getAccountNumber());
+        console.log(acc2.balance());
+
+    </script>
+</body>
+
+</html>

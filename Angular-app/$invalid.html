@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="">
+
+<head>
+    <title>$Invalid Example</title>
+    <script src="angular.js"></script>
+</head>
+
+<body ng-app="">
+    <p>Try writing an E-mail address in the input field:</p>
+    <form name="form">
+        <input type="email" name="input" ng-model="input">
+    </form>
+
+    <p>The input's valid state is:</p>
+    <h1>{{form.input.$valid}}</h1>
+
+
+
+</body>
+
+</html>

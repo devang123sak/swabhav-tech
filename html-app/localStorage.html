@@ -1,0 +1,52 @@
+<htm>
+
+    <head>
+        <title>
+            Local Storage
+        </title>
+    </head>
+
+    <body>
+        <input type="text" id="myText" value="">
+        <button onclick="pushData()">ADD</button>
+        <button onclick="removeEntery()">remove</button>
+
+        <script>
+            var myArr = [];
+
+            if (!(localStorage.length == 0)) {
+                retriveData();            
+            }
+
+            function pushData() {
+                var inputText = document.getElementById('myText').value;
+                console.log(inputText);
+
+                myArr.push(inputText);
+                // console.log(myArr.length);
+                storeDataToserver();
+            }
+
+            function storeDataToserver() {
+                var stringData = JSON.stringify(myArr);
+                localStorage.setItem("storeDataOfArr", stringData);
+            }
+
+            function retriveData() {
+                var items = JSON.parse(localStorage.getItem("storeDataOfArr"));
+                // console.log(items);
+                myArr = items;
+                //console.log(myArr);
+            }
+
+            function removeEntery() {
+                var getId = document.getElementById("myText").value;
+                var a = myArr.indexOf(getId);
+                console.log(getId);
+                myArr.splice(a, 1);
+              
+                storeDataToserver();
+            }
+        </script>
+    </body>
+</htm>

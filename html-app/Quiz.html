@@ -1,0 +1,244 @@
+<html>
+
+<head>
+    <title>
+        General Knowledge (GK) Quiz
+    </title>
+
+    <style>
+        p {
+            text-align: center;
+            font-size: 100px;
+        }
+
+        #start {
+            margin-left: 45%;
+            font-size: 300%;
+        }
+
+        #display {
+            text-align: center;
+        }
+
+        #next {
+            margin-left: 45%;
+            font-size: 100%;
+        }
+
+        #result {
+            text-align: center;
+        }
+
+        #percentage {
+            text-align: center;
+            font-size: 200%;
+        }
+
+        #questioNumber {
+            text-align: center;
+            font-size: 200%;
+        }
+    </style>
+</head>
+
+<body bgcolor="#99ffe6">
+    <div id="startPage">
+        <p>QUIZ GAME</p>
+        <p id="questioNumber"></p>
+    </div>
+    <div id="display">
+
+    </div>
+    <div id="questioNumber"></div>
+    <button id="start" onclick="displayQuestion()">START</button>
+    <div id="result"></div>
+    <div id="percentage"></div>
+
+    <script>
+
+        var questionsArray = [{
+            "question": "Which is the largest state in India in terms of area?",
+            "option1": " Rajasthan", "option2": " Madhya Pradesh", "option3": " Maharashtra", "option4": " Gujarat", "answer": "option1"
+        }, {
+            "question": "Which of the following state and UTs is also known as 'French Riviera of the East'?",
+            "option1": " Daman & Diu", "option2": " Puducherry", "option3": " Goa", "option4": " Kochi", "answer": "option2"
+        }, {
+            "question": " Which Indian state is popularly known as 'God's Own Country'?",
+            "option1": " Gujarat", "option2": " Madhya Pradesh", "option3": " Kerala", "option4": " Lakshadweep", "answer": "option3"
+        }, {
+            "question": "_______is a popular state which is known for its beauty and splendour and also known as 'Devbhoomi'.",
+            "option1": " Nagaland", "option2": "  Jammu & Kashmir", "option3": " Uttarakhand", "option4": " Himachal Pradesh", "answer": "option4"
+        }, {
+            "question": "Which of the following Indian state is known for the meeting point of Mongoloids and Caucasoid?",
+            "option1": "  Himachal Pradesh", "option2": " Assam", "option3": " Bihar", "option4": " West Bengal", "answer": "option2"
+        }, {
+            "question": "What is the capital of Arunachal Pradesh?",
+            "option1": " Itanagar", "option2": " Dispur", "option3": " Imphal", "option4": " Shillong", "answer": "option1"
+        }, {
+            "question": "Which state has the largest population?",
+            "option1": " Uttar Pradesh", "option2": "Maharastra", "option3": " Bihar", "option4": " Andra Pradesh", "answer": "option1"
+        }, {
+            "question": "Amul Camel Milk was launched in the state of",
+            "option1": " Maharashtra", "option2": "Gujarat", "option3": " Rajasthan", "option4": " Sikkim", "answer": "option2"
+        }, {
+            "question": "Airports Authority of India (AAI) plan to test remote Air Traffic Control (ATC) tower system for which of the following state?",
+            "option1": " Tamil Nadu", "option2": "Haryana", "option3": " Uttar Pradesh", "option4": " Gujarat", "answer": "option3"
+        }, {
+            "question": "How many states signed an agreement for Renukaji Dam Multipurpose Project?",
+            "option1": "4", "option2": "6", "option3": " 9", "option4": " 12", "answer": "option2"
+        }];
+
+        var displayDiv = document.getElementById("display");
+        var numberValue = 0;
+        var count = 0;
+        var totalQuestion = 1;
+        var a = 5;
+
+        function displayQuestion() {
+            document.getElementById("start").style.visibility = "hidden";
+            randonNumberGenerate();
+            var getItem = questionsArray[numberValue];
+            createDiv(numberValue);
+            createRadioBtn(getItem);
+            createNextButton();
+            totalQuestion++;
+            displayRemainingQues();
+        }
+
+        function createDiv(numberValue) {
+            var getItem = questionsArray[numberValue];
+            displayDiv.innerHTML = "</br>" + "</br>" + totalQuestion + ")" + getItem.question + "</br>";
+        }
+
+        function createRadioBtn(getItem) {
+            for (var i = 1; i < 5; i++) {
+                var value = "option" + i;
+                var radioBtn = document.createElement("INPUT");
+                radioBtn.setAttribute("type", "radio");
+                radioBtn.setAttribute("value", value);
+                radioBtn.setAttribute("name", "radioBtns" + totalQuestion);
+                radioBtn.setAttribute("id", "d" + totalQuestion);
+                displayDiv.append(radioBtn);
+                createLabel(getItem, i);
+            }
+        }
+
+        function createLabel(numberValue, i) {
+            var labelElement = document.createElement("label");
+            var labelText;
+            if (i == 1) {
+                var txt = numberValue.option1;
+                labelText = document.createTextNode(txt);
+            } else if (i == 2) {
+                var txt = numberValue.option2;
+                labelText = document.createTextNode(txt);
+            } else if (i == 3) {
+                var txt = numberValue.option3;
+                labelText = document.createTextNode(txt);
+            } else if (i == 4) {
+                var txt = numberValue.option4;
+                labelText = document.createTextNode(txt);
+            }
+            labelElement.append(labelText);
+            displayDiv.append(labelElement);
+        }
+
+        function randonNumberGenerate() {
+            var randomValue = Math.floor((Math.random() * 9) + 1);
+            numberValue = randomValue;
+            return randomValue;
+        }
+
+        function createNextButton() {
+            var nextBtn = document.createElement("button");
+            var nextBtnTxt = document.createTextNode("NEXT");
+            nextBtn.setAttribute("id", "next");
+            nextBtn.append(nextBtnTxt);
+            nextBtn.addEventListener("click", gotoNextQuestion);
+            document.body.append(nextBtn);
+        }
+
+        function gotoNextQuestion() {
+            checkAnsewr(numberValue);
+
+            if (totalQuestion <= 5) {
+                displayRemainingQues();
+                randonNumberGenerate();
+                var getItem = questionsArray[numberValue];
+                createDiv(numberValue);
+                createRadioBtn(getItem);
+                totalQuestion++;
+            }
+            if (totalQuestion == 6) {
+                createSubmitBtn();
+                document.getElementById("next").style.visibility = "hidden";
+            }
+        }
+
+        function createSubmitBtn() {
+            var btn = document.createElement("button");
+            var resetBtn = document.createElement("button");
+            var btnTxt = document.createTextNode("SUBMIT");
+            var resetBtnTxt = document.createTextNode("RESET");
+            btn.setAttribute("id", "submit");
+            resetBtn.setAttribute("id", "reset");
+            btn.append(btnTxt);
+            resetBtn.append(resetBtnTxt);
+            btn.addEventListener("click", calculateResult);
+            resetBtn.addEventListener("click", resetPage);
+            document.body.append(btn);
+            document.body.append(resetBtn);
+        }
+
+        function calculateResult() {
+            document.getElementById("questioNumber").style.visibility = "hidden";
+            var percentage = (count / 5) * 100;
+
+            document.getElementById("result").innerText = "YOUR SCORE =  " + count + "/5";
+            document.getElementById("percentage").innerText = "percentage = " + percentage + "%";
+
+            disableBtnClick();
+        }
+
+        function checkAnsewr(numberValue) {
+            var ans = questionsArray[numberValue].answer;
+            checkOption(ans);
+        }
+
+        function checkOption(ans) {
+            var d = "radioBtns" + (totalQuestion - 1);
+            console.log(d);
+            var radioButtons = document.getElementsByName(d);
+            console.log(radioButtons);
+
+            for (var x = 0; x < radioButtons.length; x++) {
+                if (radioButtons[x].checked) {
+                    var d = radioButtons[x].value;
+                    rightAns(ans, d);
+                }
+            }
+        }
+
+        function rightAns(ans, d) {
+            if (ans == d) {
+                count++;
+            }
+        }
+
+        function disableBtnClick() {
+            document.getElementById("submit").disabled = true;
+        }
+
+        function resetPage() {
+            location.reload();
+        }
+
+        function displayRemainingQues() {
+            document.getElementById("questioNumber").innerHTML = "Question Remaining = " + a;
+            a--;
+        }
+
+    </script>
+</body>
+
+</html>

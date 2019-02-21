@@ -12,9 +12,11 @@ import javax.xml.transform.TransformerException;
 
 import com.techlab.organizational.heirarchy.Employee;
 import com.techlab.organizational.heirarchy.HeirarchyBuilder;
+import com.techlab.organizational.heirarchy.JtreeFile;
 import com.techlab.organizational.heirarchy.Loader;
 import com.techlab.organizational.heirarchy.Parsing;
 import com.techlab.organizational.heirarchy.Xml;
+import com.techlab.organizational.heirarchy.JtreeFile;
 
 public class EmployeeTest {
 
@@ -24,8 +26,10 @@ public class EmployeeTest {
 		// HeirarchyBuilder build = new HeirarchyBuilder();
 		// build.buildHeirarchy();
 
-		Xml x = new Xml();
-		x.createXmlFile();
+	//	Xml x = new Xml();
+	//	x.createXmlFile();
+		
+		JtreeFile jtree= new JtreeFile();
 	}
 
 }

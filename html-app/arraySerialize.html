@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>serialize</title>
+
+</head>
+
+<body>
+    <button onclick="add(), display()">add</button>
+    <p id="dis"></p>
+    <script>
+
+        var movies = ["Reservoir Dogs", "Pulp Fiction", "Jackie Brown",
+            "Kill Bill", "Death Proof", "Inglourious Basterds"];
+
+
+        function add() {
+
+            localStorage.setItem("arrayData", movies);
+        }
+
+        function display() {
+            var getValue = localStorage.getItem("arrayData");
+           document.getElementById("dis").innerHTML=getValue;
+        }
+
+
+    </script>
+</body>
+
+</html>

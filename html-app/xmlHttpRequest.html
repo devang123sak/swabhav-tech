@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <title>
+        XML Http Request
+    </title>
+</head>
+
+<body>
+    <button id="showBtn" onclick="showData()">SHOW DATA</button>
+    <div id="div1"></div>
+    <script>
+        var data = [];
+        function showData() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var obj = JSON.parse(xhttp.response);
+                    data = obj;
+                    displayData();
+                }
+            };
+            xhttp.open("GET", "studentData.json", true);
+            xhttp.send();
+
+        }
+
+        function displayData() {
+            for (var i = 0; i < data.length; i++) {
+                var d = document.createElement("div" + i);
+                d.innerHTML = (i + 1) + ")" + "NAME = " + data[i].name + "</br>" + "CLASS = " + data[i].class
+                    + "</br>" + "ROLL NUMBER = " + data[i].rollNum + "</br>" + "</br>";
+                document.body.append(d);
+
+            }
+        }
+    </script>
+</body>
+
+</html>

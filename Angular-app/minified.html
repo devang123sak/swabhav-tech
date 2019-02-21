@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="setTimeOut">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EVENT</title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+    <div ng-controller="timeOutController">
+        <button ng-click="student()">show</button>
+        <p>{{obj.name}}</p>
+        <p>{{obj.location}}</p>
+        <p>{{obj.cgpa}}</p>
+        <p><img ng-src="{{obj.profile}}"></p>
+
+    </div>
+
+    <script>
+      /*  angular.module('setTimeOut', []).controller('timeOutController', ['$scope', '$timeout', function ($scope, $timeout) {
+            $scope.student = function () {
+                $timeout(function () {
+                    $scope.obj = {
+                        name: "rajesh",
+                        location: "mumbai",
+                        cgpa: 7.5,
+                        profile: "profile.png",
+                    }
+                }, 2000);
+
+
+            }
+        }])*/
+    </script>
+
+    <script>
+        angular.module("setTimeOut", []).controller("timeOutController",
+         ["$scope", "$timeout", function (o, e) { o.student = function () { e(function ()
+             { o.obj = { name: "rajesh", location: "mumbai", cgpa: 7.5, profile: "profile.png" } }, 2e3) } }]);
+    </script>
+
+
+</body>
+
+</html>

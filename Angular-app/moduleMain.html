@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="moduleA">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.js"></script>
+    <script src="moduleA.js"></script>
+    <script src="moduleB.js"></script>
+    <script src="moduleC.js"></script>
+</head>
+
+<body>
+    <div ng-controller="controllerA">
+        <h1> {{controllerA.message}}
+        </h1>
+    </div>
+
+    <div ng-controller="controllerB">
+        <h1> {{controllerB.message}}
+        </h1>
+    </div>
+    <div ng-controller="controllerC">
+        <h1> {{controllerC.message}}
+        </h1>
+    </div>
+
+</body>
+
+</html>

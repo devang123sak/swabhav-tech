@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swabhavtechlab">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Binding</title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+
+    <div ng-controller="twoWayBinding">
+        <h1>Two Way Binding</h1>
+        <h2>First Name : {{emplyoee.firstname}}</h2>
+        <h2>Last Name : {{emplyoee.lastname}}</h2>
+        <h2>Roll Number: {{emplyoee.rollNumber}}</h2>
+
+        <p> First Name: <input ng-model="emplyoee.firstname"></p>
+        <p>last Name: <input ng-model="emplyoee.lastname"></p>
+        <p>Roll Number: <input ng-model="emplyoee.rollNumber"></p>
+
+    </div>
+
+    <div ng-controller="twoWayBinding">
+        <h1>One Way Binding</h1>
+        <h2>First Name : {{emplyoee.firstname}}</h2>
+        <h2>Last Name : {{emplyoee.lastname}}</h2>
+        <h2>Roll Number: {{emplyoee.rollNumber}}</h2>
+    </div>
+
+    <div ng-controller="twoWayBinding">
+        <h1>One Time </h1>
+        <h2>First Name : {{::emplyoee.firstname}}</h2>
+        <h2>Last Name : {{::emplyoee.lastname}}</h2>
+        <h2>Roll Number: {{::emplyoee.rollNumber}}</h2>
+    </div>
+
+    <script>
+        angular.module('swabhavtechlab', []).controller('twoWayBinding', function ($scope) {
+
+            var emplyoee = {
+                firstname: "sachin",
+                lastname: "shinde",
+                rollNumber: 100,
+
+            }
+            $scope.emplyoee = emplyoee;
+
+        })
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<section id="display">
+
+    <div style="margin-left: 600px;font-size: larger" ng-controller="loginPageController">Logging status :<span
+            class="badge badge-light">{{status}}</span>
+        <button type="submit" class="btn btn-primary" ng-hide="logoutHideStatus" ng-click="logout()">Logout</button>
+        <span style="margin-left: 100px" ng-hide="welcomeLabel" nd-model="welcomeText">WelCome,{{userName}}</span>
+    </div>
+    <button type="button" class="btn btn-primary">
+        Total Student <span class="badge badge-light">{{count}}</span>
+    </button>
+
+    <table id="table" ng-hide="tableToggle" class="table table-striped">
+        <tr>
+            <th> Roll number</th>
+            <th>Student Name</th>
+            <th>Age</th>
+            <th>Email </th>
+            <th>Date of Birth</th>
+            <th>IS Male</th>
+            <th>EDIT</th>
+            <th>DELETE</th>
+        </tr>
+        <tbody ng-repeat="student  in studentdata | orderBy:'name'">
+            <tr>
+                <td>{{student.rollNo}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.age}}</td>
+                <td>{{student.email}}</td>
+                <td>{{student.date|date:'short'}}</td>
+                <td>{{student.isMale}}</td>
+                <td>
+                    <a href="#/edit/{{student.id}}" class="btn btn-primary" ng-disabled="isDisabled">Edit</a>
+                </td>
+                <td>
+                    <button type="submit" ng-disabled="isDisabled" id="{{student.id}}" class='btn btn-danger'
+                        ng-click="deleteData($event)" ng-controller="deleteController">
+                        Delete</button>
+                </td>
+
+            </tr>
+        </tbody>
+</section>

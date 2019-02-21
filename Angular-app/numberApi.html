@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swabhavtechlab">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Number Api</title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+
+    <div ng-controller="httpRequest">
+        Enter the Number :<input type="text" ng-model="textNumber"><button ng-click="getValue()">Search</button>
+        <br> <br> <br>
+        {{number}}
+    </div>
+
+    <script>
+        /*
+        <div ng-controller="httpRequest">
+                Enter the Number :<input type="text" ng-model="textNumber"><button ng-click="getValue()">Search</button>
+                <br> <br> <br>
+                {{number}}
+            </div>*/
+        /*   angular.module("swabhavtechlab", []).controller("httpRequest", ["$scope", "$http", "$log", function ($scope, $http, $log) {
+               console.log("inside");
+
+               $http({
+                   method: "GET",
+                   url: "http://numbersapi.com/500",
+               }).then(function (response) {
+                   $scope.number = response.data;
+                   console.log($scope.number);
+                   $log.info(response);
+               }), function (reason) {
+                   $scope.error = reason.data;
+                   $log.info(reason);
+               }
+           }])*/
+
+    </script>
+
+
+    <script>
+        angular.module("swabhavtechlab", []).controller("httpRequest", ["$scope", "$http", "$log", function ($scope, $http, $log) {
+            $scope.getValue = function () {
+                $http({
+                    method: "GET",
+                    url: "http://numbersapi.com/" + $scope.textNumber,
+                }).then(function (response) {
+                    $scope.number = response.data;
+                    console.log($scope.number);
+                    $log.info(response);
+                })
+            }
+
+        }])   
+    </script>
+</body>
+
+</html>

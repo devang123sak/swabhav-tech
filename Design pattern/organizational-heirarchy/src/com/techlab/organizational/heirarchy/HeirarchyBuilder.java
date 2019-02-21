@@ -16,7 +16,7 @@ public class HeirarchyBuilder {
 		list = p.finalList();
 		rootElement(list);
 		getLeafElement(list);
-		// displayTree();
+		 displayTree();
 	}
 
 	public static List<Employee> rootElement(List<Employee> list) {

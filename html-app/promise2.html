@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>promise 2</title>
+</head>
+
+<body>
+
+    <script>
+        let dataService = function () {
+            let services = {};
+            services.cubeOfEven = function (no) {
+                return new Promise(function (resolve, reject) {
+                    if (no % 2 == 0) {
+                        resolve(no * no * no);
+                    } else {
+                        reject("no is not even");
+
+                    }
+                })
+            }
+            return services;
+        }();
+
+        dataService.cubeOfEven(2)
+            .then((r => { console.log(r) }))
+            .catch((r => { console.log("not a even number") }));
+        console.log("End of script");
+    </script>
+
+</body>
+
+</html>

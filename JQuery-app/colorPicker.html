@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <title>
+        COLOR PICKER
+    </title>
+
+    <script src="JQuery.js"></script>
+    <script>
+
+        ($(document).ready(function () {
+            var colorName = $("#dropDownList").val();
+            $("#bg").css("background-color", colorName);
+
+            $("#dropDownList").change(function () {
+                var colorName = $(this).val();
+                $("#bg").css("background-color", colorName);
+            });
+        }))();
+
+    </script>
+
+</head>
+
+<body id="bg">
+    <select id="dropDownList">
+        <option value="#ff4d4d">RED</option>
+        <option value="#4dff4d">GREEN</option>
+        <option value="#6666ff" selected="selected">BLUE</option>
+    </select>
+
+
+</body>
+
+</html>

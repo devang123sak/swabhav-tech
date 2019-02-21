@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swabhavtechlab">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Task Service</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+
+    <script src="angular.js"></script>
+    <script src="../html-app/moment.js"></script>
+
+    <style>
+        body {
+            background-color: #c2c2f0
+        }
+    </style>
+</head>
+
+<body class="container">
+
+    <div class="jumbotron" style="text-align: center; ">TASK</div>
+    <div ng-controller="displayData">
+        <br>
+        <h2> Enter the Task : <input type="text" ng-model="taskText"><button class="btn btn-primary"
+                ng-click="addTaskToList()" style="margin-left: 10px; height: 45px; width: 100px">ADD</button></h2>
+        <h3>
+            <h3 ng-repeat="task in taskList ">
+                <span>{{task.description}}</span><br><span>{{task.taskDate|date:'short'}}</span></h3>
+        </h3>
+    </div>
+    <script>
+        angular.module("swabhavtechlab", []).factory("services", ["$q", "$http", function ($q, $http) {
+            console.log("inside service");
+            var obj = {};
+
+            obj.getTaskList = function () {
+                var list = retriveData();
+                //console.log(list);
+                return list;
+            }
+
+            obj.addtaskList = function (list) {
+                var taskList = [];
+                taskList.unshift(list);
+                save(list);
+            }
+
+            var save = function (list) {
+                var data = retriveData();
+                //  console.log(list);
+                data.unshift(list);
+                let stringData = JSON.stringify(data);
+                localStorage.setItem("taskList", stringData);
+            }
+
+            var retriveData = function () {
+                var taskList = [];
+                if (localStorage.getItem("taskList") == null) {
+                    // console.log("first time");
+                    return taskList;
+                } else {
+                    var items = JSON.parse(localStorage.getItem("taskList"));
+                    //console.log(items);
+                    taskList = items;
+                    // console.log(taskList);
+                    return taskList;
+                }
+            }
+            obj.getTaskList();
+
+            return obj;
+        }]).controller("displayData", ["$scope", "services", function ($scope, services) {
+            $scope.taskList = services.getTaskList();
+            $scope.addTaskToList = function () {
+                if (($scope.taskText == "")) {
+                    alert("Enter Task Is Empty");
+                } else {
+                    var task = {
+                        description: $scope.taskText,
+                       // taskDate: new Date(),
+                        taskDate: moment().format('MMMM Do YYYY'),
+                        status: false,
+                    };
+                    services.addtaskList(task);
+                    console.log(task);
+                    $scope.taskText = "";
+                }
+                $scope.taskList = services.getTaskList();
+            }
+        }])
+    </script>
+</body>
+
+</html>

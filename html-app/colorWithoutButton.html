@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Color Without Button
+    </title>
+    <style>
+        div {
+            margin-left: 45%;
+            margin-top: 20%;
+        }
+    </style>
+
+</head>
+
+<body onload="selectColor()">
+    <div>
+        <select id="colorOption" onclick="selectColor()">
+
+            <option id="red" value="#ff9999">red</option>
+            <option id="blue" value=" #8080ff" selected="selected">blue</option>
+            <option id="green" value=" #99ff99">green</option>
+
+        </select>
+    </div>
+    <script>
+        function selectColor() {
+            var selectedValue = document.getElementById("colorOption").value;
+            document.body.style.backgroundColor = selectedValue;
+
+        }
+    </script>
+</body>
+
+</html>

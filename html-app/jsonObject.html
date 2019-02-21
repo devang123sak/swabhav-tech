@@ -1,0 +1,165 @@
+<html>
+
+<head>
+    <title>
+        JSON Object
+    </title>
+</head>
+
+<body>
+    <p>Name=<input type="text" id="txtName"></p>
+    <p>class =<input type="text" id="txtClass"></p>
+    <p>Roll number =<input type="text" id="txtRollnum"></p>
+    <button id="dataAdd" onclick="addData()" id="btn">ADD</button>
+
+    <div id="display"></div>
+
+    <script>
+
+        var storeData = [];
+        var node = document.getElementById("display");
+
+        if (!(localStorage.length == 0)) {
+            retriveData();
+            display();
+        }
+
+        txtRollnum.addEventListener("keyup", function (event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                document.getElementById("dataAdd").click();
+            }
+        });
+
+        function addData() {
+            var obj = getUserInput();
+            console.log(obj);
+            storeData.push(obj);
+            dataStoreToServer();
+            if (storeData.length > 1) {
+                removeDiv();
+            }
+            display();
+            clearText();
+            location.reload();
+        }
+
+        function display() {
+            for (var i = 0; i < storeData.length; i++) {
+                createDiv(storeData[i], i);
+            }
+        }
+
+        function getUserInput() {
+            var inputName = document.getElementById("txtName").value;
+            var inputClass = document.getElementById("txtClass").value;
+            var inputRollno = document.getElementById("txtRollnum").value;
+            var obj = { "name": inputName, "class": inputClass, "rollNum": inputRollno };
+            return obj;
+        }
+
+        function createDiv(data, i) {
+            var newDiv = document.createElement("div");
+            newDiv.setAttribute("id", "id" + i);
+
+            newDiv.innerHTML = "</br>" + "</br>" + "Name = " + data.name + "</br>" + "class = " + data.class +
+                "</br>" + "Roll number = " + data.rollNum;
+            node.appendChild(newDiv);
+            createButton(newDiv, i);
+        }
+
+        function createButton(newDiv, i) {
+            createOptionButton(newDiv, "DELETE", i);
+            createOptionButton(newDiv, "SELECT", i);
+            createOptionButton(newDiv, "UPDATE", i);
+        }
+
+        function createOptionButton(newDiv, butttonName, i) {
+            var createBtn = document.createElement("button");
+            var createBtnTxt = document.createTextNode(butttonName);
+            createBtn.setAttribute("id", "id" + i);
+            createBtn.appendChild(createBtnTxt);
+            createBtn.addEventListener("click", buttonClick);
+            newDiv.append(createBtn);
+        }
+
+        function buttonClick(e) {
+            if (e.srcElement.innerHTML == "DELETE") {
+                deleteData(e);
+            } else if (e.srcElement.innerHTML == "SELECT") {
+                selectData(e);
+            } else if (e.srcElement.innerHTML == "UPDATE") {
+                updateData(e);
+            }
+        }
+
+        function deleteData(e) {
+            var indexOfArray = obtainIndexOfArray(e);
+            storeData.splice(indexOfArray, 1);
+            document.getElementById(e.srcElement.id).remove();
+            removeValueFromStorage(indexOfArray);
+            location.reload();
+        }
+
+        function selectData(e) {
+            var indexOfArray = obtainIndexOfArray(e);
+            console.log(indexOfArray);
+            var arrayData = storeData[indexOfArray];
+            var selectName = arrayData.name;
+            var selectClass = arrayData.class;
+            var selectRollNum = arrayData.rollNum;
+            document.getElementById("txtName").value = selectName;
+            document.getElementById("txtClass").value = selectClass;
+            document.getElementById("txtRollnum").value = selectRollNum;
+         
+        }
+
+        function updateData(e) {
+            var obj = getUserInput();
+            var indexOfArray = obtainIndexOfArray(e);
+            storeData.splice(indexOfArray, 1, obj);
+            dataStoreToServer();
+            location.reload();
+        }
+
+
+        function obtainIndexOfArray(e) {
+            var clickId = e.srcElement.id;
+            var getIndex = clickId.substring(2, clickId.length);
+            return getIndex;
+        }
+
+        function removeDiv() {
+            for (var i = 0; i <= storeData.length - 2; i++) {
+                var element = document.getElementById("id" + i);
+                node.removeChild(element);
+            }
+        }
+
+        function clearText() {
+            document.getElementById("txtName").value = '';
+            document.getElementById("txtClass").value = '';
+            document.getElementById("txtRollnum").value = '';
+        }
+
+        function dataStoreToServer() {
+            var stringData = JSON.stringify(storeData);
+            localStorage.setItem("storeData1", stringData);
+        }
+
+        function retriveData() {
+            var items = JSON.parse(localStorage.getItem("storeData1"));
+            storeData = items;
+        }
+
+        function removeValueFromStorage(indexOfArray) {
+            retriveData();
+            storeData.splice(indexOfArray, 1);
+            dataStoreToServer();
+        }
+
+    </script>
+</body>
+</head>
+
+</html>

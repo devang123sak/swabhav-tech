@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <style>
+        * {
+            margin: 1%;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid blue;
+            border-bottom: 16px solid blue;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="form" data-toggle="validator">
+
+        <div class="form-group">
+            <label for="exampleInputNumber">Roll Number</label>
+            <input type="rollNumber" min="0" class="form-control" id="inputRollNumber" placeholder="Enter Roll Number"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputName">Name</label>
+            <input type="name" class="form-control" id="inputName" placeholder="Enter Name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputEmail">Email Id</label>
+            <input type="email" class="form-control" id="inputEmail" placeholder="Enter Email Id" required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputAge">Age</label>
+            <input type="age" class="form-control" id="inputAge" placeholder="Enter Age in years" required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputDate">Date</label>
+            <input type="date" class="form-control" id="inputDate" placeholder="Enter Date date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleInputGender">Gender</label>
+            <input type="radio" name="gender" value="male" id="Male"> Male<input type="radio" name="gender"
+                value="female" id="Female">Female
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class=" btn btn-info" id="submit">Submit</button>
+        </div>
+
+    </form>
+
+    <button id="display" class="btn btn-warning" style="margin-left: 50%">Display</button>
+    <span id="error"></span>
+    <div id="load" class="loader"></div>
+    <br>
+
+    <div id="table"></div>
+
+    <script>
+        $("#load").hide();
+        $('#form').submit(function () {
+            $("#load").show();
+
+            var gender = getGender();
+            console.log(gender);
+            $.post("http://gsmktg.azurewebsites.net/api/v1/techlabs/test/students/",
+                {
+                    "rollNo": $('#inputRollNumber').val(),
+                    "name": $('#inputName').val(),
+                    "age": $('#inputAge').val(),
+                    "email": $('#inputEmail').val(),
+                    "date": $('#inputDate').val(),
+                    "isMale": gender,
+                },
+                function (data, status) {
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+
+            $("#load").hide();
+        });
+        
+
+        $('#display').on('click', function () {
+            $("#load").show();
+            displayData();
+        })
+
+        function displayData() {
+            $.ajax({
+                url: 'http://gsmktg.azurewebsites.net/api/v1/techlabs/test/students/',
+                type: 'get',
+                success: function (data) {
+                    $("#load").hide();
+                    createTable(data);
+
+                }, error: function () {
+                    alert("try again later");
+                }
+            })
+        }
+
+        function createTable(data) {
+            var getData = data;
+            var rowData;
+            rowData = "<table class='table table-striped'>";
+            rowData += "<th>Roll Number</th><th>Student name</th> <th>Age </th> <th>Email Id</th> <th>Date</th><th>Edit</th><th>Delete</th>";
+            for (var i = 0; i < getData.length; i++) {
+                var rollNumber = getData[i].rollNo;
+                var name = getData[i].name;
+                var age = getData[i].age;
+                var date = getData[i].date;
+                var email = getData[i].email;
+                rowData += '<tr>';
+                rowData += "<td>" + rollNumber + "</td>";
+                rowData += "<td>" + name + "</td>";
+                rowData += "<td>" + age + "</td>";
+                rowData += "<td>" + email + "</td>";
+                rowData += "<td>" + date + "</td>";
+                var id = "edit" + i;
+                rowData += "<td>" + "<button type='button' id ='edit' class='btn btn'>Edit</button>" + "<button id='upload'  class=' glyphicon glyphicon-ok btn btn-success'></button>" +
+                    "               <button id='close' class='glyphicon glyphicon-remove  btn btn-danger'></button>" + "</td>";
+                //  rowData += "<td>" + "<button type='button' onclick='editData(" + rollNumber + ")' class='btn btn-default'>Edit</button>" + "</td>";
+
+                rowData += "<td>" + "<button type='button' id='delete' class='btn btn-danger'>Delete</button>" + "</td>";
+                rowData += "</tr>";
+
+            }
+            rowData += "</table>";
+            $("#table").html(rowData);
+
+        }
+
+        $(document).on("click", "#delete", function () {
+            var rollNumber = $(this).parent().siblings(":first").text();
+            deleteData(rollNumber);
+        });
+
+        function deleteData(id) {
+            $.ajax({
+                url: 'http://gsmktg.azurewebsites.net/api/v1/techlabs/test/students/' + id,
+                method: 'DELETE',
+                success: function () {
+                    var answer = confirm("CONFIRM");
+                    if (answer == true) {
+                        alert("Data is Deleted");
+                        location.reload();
+                    } else {
+                        location.reload();
+                    }
+                }, error: function () {
+                    alert("try again");
+                }
+            })
+        }
+
+
+        $(document).on("click", "#edit", function () {
+            var rollNumber = $(this).parent().siblings(":first").text();
+            editData(rollNumber);
+        });
+
+        function editData(id) {
+
+            $.ajax({
+                url: 'http://gsmktg.azurewebsites.net/api/v1/techlabs/test/students/' + id,
+                method: 'get',
+                success: function (data) {
+                    console.log(data);
+                    $('#inputRollNumber').val(data.rollNo);
+                    $('#inputName').val(data.name);
+                    $('#inputAge').val(data.age);
+                    $('#inputEmail').val(data.email);
+                    $('#inputDate').val(data.date);
+                    if (data.isMale == true) {
+                        $('input:radio[id=Male]')[0].checked = true;
+                        return;
+                    } else {
+                        $('input:radio[id=Female]')[0].checked = true;
+                    }
+                }, error: function () {
+                    alert("try again");
+                }
+            })
+        }
+
+        function updateData(id) {
+            var gender = getGender();
+            $.ajax({
+                url: 'http://gsmktg.azurewebsites.net/api/v1/techlabs/test/students/' + id,
+                method: 'PUT',
+                data: {
+                    "rollNo": $('#inputRollNumber').val(),
+                    "name": $('#inputName').val(),
+                    "age": $('#inputAge').val(),
+                    "email": $('#inputEmail').val(),
+                    "date": $('#inputDate').val(),
+                    "isMale": gender,
+                },
+                success: function () {
+                }
+            });
+        }
+
+        $(document).on("click", "#upload", function () {
+            var id = $(this).parent().siblings(":first").text();
+            updateData(id);
+
+        });
+
+        $(document).on("click", "#close", function () {
+            location.reload();
+        });
+
+
+        function getGender() {
+            var setMale = $('#Male:checked').val();
+            var setFemale = $('#Female:checked').val();
+            if (setMale == "male") {
+                gender = true;
+
+            } if (setFemale == "female") {
+                gender = false;
+            }
+
+            return gender;
+        }
+
+
+    </script>
+</body>

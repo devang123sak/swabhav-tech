@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <title>
+        Stop Watch
+    </title>
+</head>
+
+<body>
+    <p id="display"></p>
+    <button id="startTime" onclick="startTime()">START</button>
+    <button id="stopTime" onclick="stopTime()">STOP</button>
+    <button id="resetTime" onclick="resetTime()">RESET</button>
+
+    <script>
+        resetTime();
+        var seconds = 0;
+        var miliSeconds = 0;
+        var intervalForSec;
+        var intervalForMiliSec;
+
+        function startTime() {
+            intervalForSec = setInterval(getSeconds, 1000);
+            intervalForMiliSec = setInterval(getMiliSeconds, 10);
+        }
+
+        function getSeconds() {
+            seconds++;
+        }
+
+        function getMiliSeconds() {
+            if (miliSeconds < 100) {
+                displayClock(seconds, miliSeconds);
+                miliSeconds++;
+            } else {
+                miliSeconds = 0;
+            }
+        }
+
+        function stopTime() {
+            clearTimeout(intervalForMiliSec);
+            clearTimeout(intervalForSec);
+        }
+
+        function resetTime() {
+            seconds = 0;
+            miliSeconds = 0;
+            displayClock(seconds, miliSeconds);
+        }
+
+        function displayClock(second, miliSeconds) {
+            document.getElementById("display").innerHTML = second + ":" + miliSeconds;
+        }
+
+
+    </script>
+</body>
+
+</html>

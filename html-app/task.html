@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+ <head>
+   <title>Task Manager</title>
+ </head>
+
+ <body>
+    <center><img src="taskImage.png"  style="width:300px" align="middle"></center> <br>
+    <h1>
+    Task Name: <input type="text" id="myText" value="">
+   <button onclick="pushData()">ADD</button>
+        
+   <p id="pText"></p>
+   <script>
+     var myArr = [];
+     function pushData()
+     {
+        // get value from the input text
+        var inputText = document.getElementById('myText').value;
+
+        // append data to the array
+        myArr.push(inputText);
+
+        var pval = "";
+
+        for(i = 0; i < myArr.length; i++)
+        {
+          pval = pval + myArr[i] + "<br/>";
+
+        }
+        // display array data
+        document.getElementById('pText').innerHTML = pval;
+     }
+   </script>
+ </body>
+</html> 

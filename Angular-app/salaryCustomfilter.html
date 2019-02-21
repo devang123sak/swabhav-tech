@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swabhavtechlab">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Custom Filter</title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+    <div ng-controller="customColorFilter">
+        Enter the Value : <input type="text" ng-model="data"><br>
+        <p style="color:{{data|salaryToColor}}">{{data}}</p>
+    </div>
+
+    <script>
+        angular.module("swabhavtechlab", []).filter('salaryToColor', function () {
+            return function (item) {
+                if (item < 50000) {
+                    return "green";
+                } else {
+                    return "red";
+                }
+                return item;
+            };
+        }).controller("customColorFilter", function ($scope) {
+            $scope.data = "";
+        })
+
+
+    </script>
+
+
+</body>
+
+</html>

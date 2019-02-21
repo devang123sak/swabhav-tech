@@ -1,0 +1,32 @@
+<section>
+
+    <table class="table table-striped" style="margin-top: 10px">
+        <label style="margin-left: 1200px">Search</label>
+        <input type="text" ng-model="searchText" placeholder="Enter text"><br>
+        <tr>
+            <th>Employee Id</th>
+            <th>Employee Name</th>
+            <th>Employee Role</th>
+            <th>Manager Id</th>
+            <th>Joining Date</th>
+            <th>Salary</th>
+            <th>Commision</th>
+            <th>Department</th>
+            <th>Delete Data</th>
+        </tr>
+        <tbody ng-repeat="emp in EmployeeArray|orderBy:'empName'|filter:searchText" ng-click="PassEvent($event)">
+            <tr>
+                <td>{{emp.empId}}</td>
+                <td>{{emp.empName}}</td>
+                <td>{{emp.empRole}}</td>
+                <td>{{emp.empManagerID}}</td>
+                <td>{{emp.empJoiningDate}}</td>
+                <td>{{emp.empSalary}}</td>
+                <td>{{emp.empCommision}}</td>
+                <td>{{emp.empDepartName}}</td>
+                <td><button class="btn btn-danger" value="{{emp.empId}}">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>

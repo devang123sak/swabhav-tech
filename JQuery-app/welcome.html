@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title>
+        WelCome Page
+    </title>
+    <script src="JQuery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#red").click(function () {
+                $("#bg").css("background-color", "#ff4d4d");
+
+            });
+            $("#green").click(function () {
+                $("#bg").css("background-color", "#4dff4d");
+            });
+        });
+    </script>
+    <style>
+        #red {
+            margin-top: 20%;
+            margin-left: 40%;
+            font-size: 200%;
+        }
+        #green {
+            margin-top: -1%;
+            margin-left: 50%;
+            font-size: 200%;
+        }
+    </style>
+
+</head>
+
+<body id="bg">
+    <div id="red">RED</div>
+    <div id="green">GREEN</div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Arrow Fuction</title>
+</head>
+
+<body>
+    <script>
+        let processData = function (no, cb) {
+            let r = Math.random() * no;
+            if (r > 5) {
+                cb(r * 5);
+            } else {
+                cb(cb)
+            }
+        }
+
+        /*  processData(100, function (r) {
+              console.log(r);
+          })*/
+
+        processData(100, (r) => { console.log(r); console.log("arrow fuction") })
+    </script>
+
+    <script>
+        function emp(name) {
+            this.empName = name;
+            this.display = function () {
+                setTimeout(function () {
+                    console.log(this.empName + " after 3 sec");
+                }, 3000)
+                console.log("END line");
+            }
+
+            this.display2 = function () {
+                setTimeout(() => {
+                    console.log(this.empName + " after 4 sec");
+                }, 4000)
+            }
+        }
+
+        let e1 = new emp("devang");
+       // e1.display();
+        e1.display2();
+
+        let e2=new emp("prachit");
+        e2.display2();
+
+        console.log(e1);
+        console.log(e2);
+
+    </script>
+</body>
+
+</html>

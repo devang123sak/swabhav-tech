@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <title>
+        $.Ajax Example
+    </title>
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid blue;
+            border-bottom: 16px solid blue;
+            width: 20px;
+            height: 20px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+    <script src="JQuery.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            if (localStorage.getItem('jQueryData') != null) {
+                displayArrayData();
+            }
+            $("#load").hide();
+            $("#getData").click(function () {
+                setTimeout(delayTime, 2000);
+                var search = $("#searchText").val();
+                if (search.length > 0) {
+                    $("#load").show();
+                }
+            });
+        });
+
+        function delayTime() {
+            var search = $("#searchText").val();
+            $.getJSON("number.json", function (obj) {
+                $.each(obj, function (key, value) {
+                    if (search == key) {
+                        //  $("#displayData").append("<li>" + value + "</li>");
+                        $("#load").hide();
+                        storeDataToServer(value);
+                        location.reload();
+                    }
+                });
+            });
+        }
+        var data = [];
+
+        function storeDataToServer(value) {
+            data.push(value);
+            localStorage.setItem("jQueryData", JSON.stringify(data));
+        }
+
+        function retriveServerData() {
+            var items = JSON.parse(localStorage.getItem("jQueryData"));
+            data = items;
+        }
+
+        function displayArrayData() {
+            retriveServerData();
+            $.each(data, function (index, value) {
+                $("#displayData").append((index + 1) + ": " + value + '<br>');
+            });
+        }
+
+    </script>
+</head>
+
+<body>
+    <input type="text" id="searchText">
+    <button id="getData">show data</button>
+    <div id="displayData"></div>
+    <div id="load" class="loader"></div>
+  
+</body>
+
+</html>

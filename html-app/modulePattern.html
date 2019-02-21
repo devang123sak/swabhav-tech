@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <title>
+        module pattern
+    </title>
+</head>
+
+<body>
+
+    <script>
+
+        var account = (function () {
+            var accountNumber, balance = 0;
+
+            var setAccountNumber = function (accNum) {
+                accountNumber = accNum;
+            };
+
+            var setBalance = function (value) {
+                balance = value;
+            };
+
+            var getAccountNumber = function () {
+                return accountNumber;
+            };
+
+            var getBalance = function () {
+                return balance;
+            };
+
+            var deposite = function (value) {
+                balance = balance + value;
+            };
+
+            var withdraw = function (value) {
+                balance = balance - value;
+            };
+
+            return {
+                getBalance: function () {
+                    return balance;
+                },
+                deposite: function (value) {
+                    deposite(value);
+                },
+                withdraw: function (value) {
+                    withdraw(value);
+                },
+                accountNumber: function (accNum) {
+                    setAccountNumber(accNum);
+                },
+                getAccountNumber: function () {
+                    return accountNumber;
+                },
+            };
+
+        })();
+    </script>
+
+</body>
+
+</html>

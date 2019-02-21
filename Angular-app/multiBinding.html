@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swabhavtechlab">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Binding</title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+    <div ng-controller="multiBinding" ng-init="bgColor">
+
+        <h2>Text : <input type="text" ng-model="Text"></h2>
+        <h2>Font Color : <select ng-model="selectedFontColor">
+                <option ng-repeat="color in fontColor">{{color}}</option>
+            </select></h2>
+        <h2>Font Size : <input type="text" ng-model="fontSize"></h2>
+        <h2>Font Family : <select ng-model="selectedFontFamily">
+                <option ng-repeat="family in fontFamily">{{family}}</option>
+            </select></h2>
+        <h2>background Color: <select ng-model="selectedBgColor">
+                <option ng-repeat="bgColor in bgColor">{{bgColor}}</option>
+            </select></h2>
+
+        <h1>OUTPUT</h1>
+        <h1>
+            <pre id="preview" ng-bind="Text" ng-style="{'background-color':selectedBgColor,
+            'font-size':fontSize+'px','font-family':selectedFontFamily,'color':selectedFontColor}"></pre>
+        </h1>
+    </div>
+
+    <script>
+        angular.module('swabhavtechlab', []).controller('multiBinding', function ($scope) {
+            $scope.Text = "";
+            $scope.fontColor = ["red", "blue", "green"];
+            $scope.fontSize = "";
+            $scope.fontFamily = ["Algerian", "Cookie", "Brush Script MT", "French Script MT"];
+            $scope.bgColor = ["yellow", "red", "green"];
+        })
+    </script>
+</body>
+
+</html>

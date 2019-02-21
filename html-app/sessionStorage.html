@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Session Storage
+    </title>
+    <style>
+        button,div,p{
+            text-align: center;
+        }
+        button{margin-top: 15%;}
+    </style>
+</head>
+
+<body>
+    <p><button onclick="clickCounter()" type="button">Click me!</button></p>
+    <div id="result"></div>
+    <p>Click the button to see the counter increase.</p>
+
+    <script>
+        function clickCounter() {
+            sessionStorage.clickcount = Number(sessionStorage.clickcount) + 1;
+            document.getElementById("result").innerHTML = "You have clicked the button " + sessionStorage.clickcount + " time(s).";
+        }
+    </script>
+</body>
+
+</html>

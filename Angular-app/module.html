@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="moduleA">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+    <div ng-controller="controllerA">
+        <h1> {{controllerA.message}}
+        </h1>
+    </div>
+
+    <div ng-controller="controllerB">
+        <h1>
+            {{controllerB.message}}
+        </h1>
+    </div>
+
+    <div ng-controller="controllerC">
+        <h1>
+            {{controllerC.message}}
+        </h1>
+    </div>
+    <script>
+        angular.module('moduleA', ['moduleB', 'moduleC']).
+            controller('controllerA', function ($scope, $rootScope) {
+
+                console.log("Inside Controller A");
+                $scope.controllerA = {
+                    message: "Controller A say Hello"
+                };
+                console.log($scope);
+                console.log($rootScope);
+            })    
+    </script>
+
+    <script>
+        angular.module('moduleB', []).
+            controller('controllerB', function ($scope, $rootScope) {
+
+                console.log("Inside Controller B");
+                $scope.controllerB = {
+                    message: "Controller B say Hello"
+                };
+                console.log($scope);
+                console.log($rootScope);
+            })    
+    </script>
+
+    <script>
+        angular.module('moduleC', []).
+            controller('controllerC', function ($scope, $rootScope) {
+
+                console.log("Inside Controller C");
+                $scope.controllerC = {
+                    message: "Controller C say Hello"
+                };
+                console.log($scope);
+                console.log($rootScope);
+                $rootScope.company='swabhav-techlab';
+            })    
+    </script>
+</body>
+
+</html>

@@ -3,8 +3,8 @@ package swabhav.tech;
 public class TestFunction {
 
 	public static void main(String[] args) {
-		// printLine();
-		printLine("@");
+		printLine();
+		 printLine("@");
 
 	}
 
@@ -16,7 +16,6 @@ public class TestFunction {
 			System.out.print(string);
 			count = count + 1;
 		}
-
 	}
 
 	static void printLine() {
@@ -24,5 +23,4 @@ public class TestFunction {
 				.println("======================================================");
 
 	}
-
 }

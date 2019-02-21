@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="swabhavtechlab">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bule Ball</title>
+    <script src="angular.js"></script>
+</head>
+
+<body>
+    <div ng-controller="buleBallController">
+
+        <button type="submit" ng-repeat="index in data" ng-click="checkBlueBall($event)" id="{{index}}"
+            ng-style="{'background-color': color}" style="padding: 15px"> {{index}}</button>
+        <br><br><p style="text-align: center"> count:{{count}}</p><br>
+
+        <p style="text-align: center">{{message}}</p>
+    </div>
+    <script>
+        angular.module("swabhavtechlab", []).controller("buleBallController", function ($scope) {
+            $scope.randomValue = Math.floor((Math.random() * 50) + 1);
+            $scope.count = 0;
+            console.log($scope.randomValue);
+            $scope.data = [];
+            for (var i = 1; i <= 50; i++) {
+                $scope.data.push(i);
+            }
+            console.log($scope.data.length);
+
+            $scope.checkBlueBall = function (event) {
+                if ($scope.count < 3) {
+                    console.log("click");
+                    if ($scope.randomValue == event.srcElement.id) {
+                        console.log("right click");
+                        event.target.style.backgroundColor = "blue";
+                        event.target.disabled = true;
+
+                    } else if ($scope.randomValue > event.srcElement.id) {
+                        console.log("lower click");
+                        event.target.style.backgroundColor = "green";
+                        event.target.disabled = true;
+                        $scope.count += 1;
+                    } else {
+                        event.target.style.backgroundColor = "red";
+                        console.log("higher click");
+                        event.target.disabled = true;
+                        $scope.count += 1;
+                    }
+
+                } if ($scope.count == 3) {
+                    $scope.message = "End Game";
+                }
+            };
+
+        })
+    </script>
+</body>
+
+</html>

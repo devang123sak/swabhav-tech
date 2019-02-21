@@ -10,6 +10,9 @@ public class PersonTest {
 				.build();
 		System.out.println(user1);
 
+		Person user2 = new Person.Builder().setAge(24).build();
+		System.out.println(user2);
+
 	}
 
 }

@@ -1,0 +1,201 @@
+<html>
+
+<head>
+    <title>
+        TODO LIST
+    </title>
+    <script src="moment.js"></script>
+    
+</head>
+
+<body>
+    <input type="text" id="addText">
+    <button id="addData" onclick="add()">ADD</button>
+    <button id="deleteBtn" onclick="deleteData()" style="margin-left: 80%">view Delete task</button>
+
+    <div id="display"></div>
+    <div id="deleteDiv"></div>
+
+
+    <script>
+        var storeArray = [];
+        var count = 1;
+        var deleteArray = [];
+        isStirke = false;
+        isClose = false;
+
+        if (!(localStorage.length == 0)) {
+            retriveData();
+            display();
+        }
+
+        if (!(localStorage.getItem("deleteData").length == 0)) {
+            deleteData();
+            retriveDeleteData();
+            var displayDiv = document.getElementById("deleteDiv");
+            displayDiv.style.visibility = "hidden";
+
+        }
+
+        function add() {
+            var task = document.getElementById("addText").value;
+            var date = moment().format();
+            var obj = getObject(date, task, isStirke, isClose);
+            storeArray.push(obj);
+            createDiv(task, isStirke, date);
+            storeDataToserver();
+            location.reload();
+        }
+
+        function getObject(date, task, isStirke, isClose) {
+            return { "date": date, "task": task, "isStirke": isStirke, "isClose": isClose };
+        }
+
+        function createDiv(text, isStirke, date, i) {
+            var displayDiv = document.getElementById("display");
+            var newDiv = document.createElement("div");
+            var newP = document.createElement("p");
+            var newPText = document.createTextNode(text);
+            newDiv.setAttribute("id", "divId" + count);
+            newP.setAttribute("id", "pId" + count);
+
+            newDiv.append(newP);
+            displayDiv.append(newDiv);
+
+            if (isStirke == true) {
+                newP.append(setStrike1(text, i, newP));
+            } else {
+                newP.append(newPText);
+            }
+            createCloseBtn(newP, date);
+            newP.addEventListener("click", strikeString);
+        }
+
+        function setStrike1(string, i, newP) {
+            document.getElementById("pId" + (i + 1)).innerHTML = string.strike();
+
+        }
+
+        function setStrike(string) {
+            return string.strike();
+        }
+
+        function createCloseBtn(newDiv, date) {
+            var show = document.getElementById("display");
+            var closeBtn = document.createElement("button");
+            var closeBtnText = document.createTextNode("X");
+            closeBtn.setAttribute("id", "closeId" + count);
+            closeBtn.append(closeBtnText);
+            newDiv.append(closeBtn);
+            count++;
+            closeBtn.addEventListener("click", closeDiv);
+
+            var printTime = moment(date).fromNow();
+            newDiv.append(printTime);
+        }
+
+        function closeDiv(e) {
+            for (var i = 0; i < storeArray.length; i++) {
+                var closeid = "closeId" + (i + 1);
+                if (closeid == e.srcElement.id) {
+                    var divid = "divId" + (i + 1);
+                    updateCloseState(i);
+                    removeValueFromStorage(i);
+                    removeDiv(closeid, divid);
+                    location.reload();
+                }
+            }
+        }
+
+        function strikeString(e) {
+            var clickId = e.srcElement.id;
+            console.log(clickId);
+            var string = document.getElementById(clickId).innerText;
+
+            var getIndex = clickId.substring(3, clickId.length);
+            updateStrikeState(getIndex, clickId);
+
+        }
+
+        function updateStrikeState(i, clickId) {
+            var indexValue = storeArray[i - 1];
+            if (indexValue.isStirke == false) {
+                isStirke = true;
+            } else {
+                isStirke = false;
+            }
+
+            var strikeString = getObject(indexValue.date, indexValue.task, isStirke, indexValue.isClose);
+            console.log(strikeString);
+            console.log(i);
+            storeArray.splice(i - 1, 1, strikeString);
+            storeDataToserver();
+            location.reload();
+        }
+
+        function updateCloseState(i) {
+            var indexValue = storeArray[i];
+            isClose = true;
+            var closeState = getObject(indexValue.date, indexValue.task, indexValue.isStirke, isClose);
+            deleteArray.push(closeState);
+            storeDeleteData();
+        }
+
+        function storeDeleteData() {
+            var deleteData = JSON.stringify(deleteArray);
+            localStorage.setItem("deleteData", deleteData);
+        }
+
+        function retriveDeleteData() {
+            var items = JSON.parse(localStorage.getItem("deleteData"));
+            deleteArray = items;
+        }
+
+        function removeDiv(closeid, divid) {
+            document.getElementById(closeid).remove();
+            document.getElementById(divid).remove();
+        }
+
+        function removeValueFromStorage(i) {
+            storeArray.splice(i, 1);
+            storeDataToserver();
+        }
+
+        function storeDataToserver() {
+            var stringData = JSON.stringify(storeArray);
+            localStorage.setItem("storeData", stringData);
+        }
+
+        function retriveData() {
+            var items = JSON.parse(localStorage.getItem("storeData"));
+            storeArray = items;
+        }
+
+        function display() {
+            retriveData();
+            console.log(storeArray);
+            for (var i = 0; i < storeArray.length; i++) {
+                createDiv(storeArray[i].task, storeArray[i].isStirke, storeArray[i].date, i);
+            }
+        }
+
+        function deleteData() {
+
+            var displayDiv = document.getElementById("deleteDiv");
+            displayDiv.style.visibility = "visible";
+
+            for (var i = 0; i < deleteArray.length; i++) {
+                var s = document.createElement("li");
+                var p = " task: " + deleteArray[i].task + "------>date : " + deleteArray[i].date
+                    + "------>isStirke : " + deleteArray[i].isStirke + "------>isClose : " + deleteArray[i].isClose;
+                var txtNode = document.createTextNode(p);
+                s.append(txtNode);
+                displayDiv.append(s);
+            }
+        }
+
+    </script>
+</body>
+
+
+</html>
