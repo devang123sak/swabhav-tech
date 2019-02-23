@@ -12,6 +12,7 @@ import javax.xml.transform.TransformerException;
 
 import com.techlab.organizational.heirarchy.Employee;
 import com.techlab.organizational.heirarchy.HeirarchyBuilder;
+import com.techlab.organizational.heirarchy.HeirarchyBuilderto;
 import com.techlab.organizational.heirarchy.JtreeFile;
 import com.techlab.organizational.heirarchy.Loader;
 import com.techlab.organizational.heirarchy.Parsing;
@@ -23,13 +24,13 @@ public class EmployeeTest {
 	public static void main(String[] args) throws FileNotFoundException,
 			ParserConfigurationException, TransformerException {
 
-		// HeirarchyBuilder build = new HeirarchyBuilder();
-		// build.buildHeirarchy();
+		// Xml x = new Xml();
+		// x.createXmlFile();
 
-	//	Xml x = new Xml();
-	//	x.createXmlFile();
-		
-		JtreeFile jtree= new JtreeFile();
+		//JtreeFile jTree = new JtreeFile();
+
+		 HeirarchyBuilderto build = new HeirarchyBuilderto();
+		 build.buildHeirarchy();
 	}
 
 }

@@ -1,44 +1,31 @@
 package com.techlab.organizational.heirarchy;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTree;
+import javax.swing.tree.DefaultMutableTreeNode;
+import com.techlab.organizational.heirarchy.HeirarchyBuilderto;
+
 
 public class JtreeFile {
+	 JFrame f = new JFrame();
+
+	 
 	
-	public class XmlToJTreeMain extends JFrame {
-		private JPanel jContentPane = null;
-		JPanel panel;
-		
-		private JPanel getJContentPane() {
-		      if (jContentPane == null) {
-		            jContentPane = new JPanel();
-		            jContentPane.setLayout(null);
-
-		                        SaxParser sp = new SaxParser(""Employee-Database/NewFile.xml");
-		                        JTree jt = new JTree(ObjectModelToTreeModel.getTreeOfModel(sp.getBookL()));
-		                        JScrollPane jp = new JScrollPane(jt);
-		                        jp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		                        jp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		                        jp.setBounds(2, 4, 500, 300);
-		                        panel.add(jp);
-		                        panel.revalidate();
-		                        panel.repaint();
-		           
-		            
-
-		      }
-		      return jContentPane;
-		}
-		
-		public XmlToJTreeMain() {
-		      super();
-		      setSize(441, 350);
-		      setContentPane(getJContentPane());
-		      setTitle("JFrame");
-		      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		      setVisible(true);
-		}
 
 	
-}
+
+	/*
+		JTree jt = new JTree(rootElement);
+		f.add(jt);
+		f.setSize(400, 400);
+		f.setVisible(true);*/
+//	}
+
 }

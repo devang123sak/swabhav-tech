@@ -1,0 +1,28 @@
+<div>
+    <h1>Binding Expression</h1>
+    <p> student Name ={{student.name}}</p>
+    <p> student cgpa ={{student.cgpa}}</p>
+    <p> student job ={{student['job']}}</p>
+    <p> student company ={{student['company']}}</p>
+</div>
+<div>{{student|json}}</div>
+
+<div>
+    <h1>Property Expression</h1>
+    <p [innerHTML]='message'></p>
+    <p [innerHTML]="'message'"></p>
+
+    <img [src]='imageUrl'>
+    
+    <div [ngStyle]="{'background':'color'}">{{student.cgpa}}</div>
+    <div [style.color]="cgpabackgroundColor">{{student.cgpa}}</div>
+</div>
+
+<div>
+    <br>
+    <input type="button" value="LoadCourse" (click)='LoadCourse()'>
+    <br>{{course}}
+    <ul>
+        <li *ngFor="let cource of courses" >{{cource}} </li>
+    </ul>
+</div>

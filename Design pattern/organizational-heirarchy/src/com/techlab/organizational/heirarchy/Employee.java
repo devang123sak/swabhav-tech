@@ -13,6 +13,7 @@ public class Employee {
 	private double salary;
 	private double commission;
 	private int department_number;
+	private List<Employee> reportee = new ArrayList<Employee>();
 
 	public Employee(int employee_id, String employee_name,
 			String employe_designation, double manager_id,
@@ -26,6 +27,7 @@ public class Employee {
 		this.salary = salary;
 		this.commission = commission;
 		this.department_number = department_number;
+
 	}
 
 	public String getEmployee_name() {
@@ -58,6 +60,14 @@ public class Employee {
 
 	public String getEmploye_designation() {
 		return employe_designation;
+	}
+
+	public void addRepotees(Employee emp) {
+		reportee.add(emp);
+	}
+	
+	public List getRepotessList(){
+		return reportee;
 	}
 
 	public static class Builder {

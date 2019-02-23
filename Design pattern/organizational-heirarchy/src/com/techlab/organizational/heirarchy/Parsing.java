@@ -30,7 +30,8 @@ public class Parsing {
 			double commission = convertNullToDouble(commissionValue);
 
 			employeeData.add(new Employee(Integer.parseInt(details[0]),
-					details[1], details[2], manager_id, details[4], Double
+					details[1].replace("'", ""), details[2].replace("'", ""),
+					manager_id, details[4].replace("'", ""), Double
 							.parseDouble(details[5]), commission, Integer
 							.parseInt(details[7])));
 		}

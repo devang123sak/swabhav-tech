@@ -5,7 +5,7 @@ angular.module("swabhav-techLab")
         return {
             templateUrl: 'Directive/header.html',
         }
-    }).directive('footer', function () {
+    }).directive('footerDirective', function () {
         return {
             templateUrl: 'Directive/footer.html',
         }
@@ -209,4 +209,9 @@ angular.module("swabhav-techLab")
             sessionStorage.removeItem("loggingStatus");
             loginServices.reloadPage();
         }
+    }]).controller('footerController', ['$rootScope', function ($rootScope) {
+        $rootScope.footer = {
+            companyNane: "Swabhav Techlabs",
+            year: "2019"
+        };
     }]);
