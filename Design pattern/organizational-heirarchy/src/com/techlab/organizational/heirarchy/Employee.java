@@ -62,11 +62,15 @@ public class Employee {
 		return employe_designation;
 	}
 
-	public void addRepotees(Employee emp) {
-		reportee.add(emp);
+//	public void addRepotees(Employee emp) {
+	//	reportee.add(emp);
+//	}
+	
+	public void addRepotee(Employee employee) {
+		reportee.add(employee);
 	}
 	
-	public List getRepotessList(){
+	public List<Employee> getRepotessList(){
 		return reportee;
 	}
 
@@ -137,5 +141,6 @@ public class Employee {
 				+ this.commission + " " + this.department_number;
 		return data;
 	}
+	
 
 }

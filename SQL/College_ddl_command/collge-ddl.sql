@@ -1,0 +1,65 @@
+CREATE TABLE COLLEGE (
+ ID              integer NOT NULL,
+ NAME              varchar(20),
+ LOCATION          varchar(20),
+ BRANCHID          integer NOT NULL,
+ BRANCHNAME        varchar(20),
+
+ PRIMARY KEY (ID)
+
+ );
+
+ SELECT*FROM COLLEGE;
+
+ CREATE TABLE STUDENT (
+
+ COLLEGEID       integer NOT NULL,
+ ID              integer NOT NULL,
+ NAME            varchar(20),
+ ADDRESS         varchar(20),
+ DOB			 varchar(10),
+ PRIMARY KEY (ID),
+ FOREIGN KEY (COLLEGEID) REFERENCES COLLEGE(ID),
+
+ );
+
+ SELECT*FROM STUDENT;
+
+ CREATE TABLE PROFESSOR (
+ COLLEGEID       integer NOT NULL,
+ ID              integer NOT NULL,
+ NAME            varchar(20),
+ ADDRESS         varchar(20),
+ DOB			 varchar(10),
+ PRIMARY KEY (ID),
+FOREIGN KEY (COLLEGEID) REFERENCES COLLEGE(ID),
+ );
+
+ SELECT*FROM PROFESSOR;
+
+
+ INSERT INTO COLLEGE VALUES (100,'slrtce','mira road');
+ INSERT INTO COLLEGE VALUES (200,'viva','virar');
+ INSERT INTO COLLEGE VALUES (300,'a.p.shah','thane');
+ INSERT INTO COLLEGE VALUES (400,'vjti','parle');
+ INSERT INTO COLLEGE VALUES ('','vjti','parle');
+
+ select*from COLLEGE;
+
+ ALTER TABLE COLLEGE
+DROP COLUMN BRANCHID;
+
+ ALTER TABLE COLLEGE
+DROP COLUMN BRANCHNAME;
+
+DELETE FROM COLLEGE WHERE ID=0;
+DELETE FROM COLLEGE WHERE ID=500;
+
+
+INSERT INTO STUDENT VALUES (100,1001,'sachin','mumbai','14/02/1994');
+INSERT INTO STUDENT VALUES (100,1002,'rajesh','mumbai','30/10/1991');
+INSERT INTO STUDENT VALUES (100,1003,'vinod','pune','20/11/1984');
+INSERT INTO STUDENT VALUES (100,1004,'rahul','thane','01/06/1997');
+INSERT INTO STUDENT VALUES (100,1005,'virendra','vasai road','19/12/1968');
+
+ INSERT INTO PROFESSOR VALUES (100,1500,'','','');

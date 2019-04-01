@@ -6,17 +6,17 @@ import java.util.List;
 
 public class HeirarchyBuilderto {
 
-	List<Employee> list = new ArrayList<Employee>();
+	List<Employee> empList = new ArrayList<Employee>();
 	Employee rootEmp;
 
 	public void buildHeirarchy() throws FileNotFoundException {
 		Parsing p = new Parsing();
-		list = p.finalList();
-		
-		 System.out.println(list);
-		rootElement(list);
-		addRepotesss(list);
-	//	displayTree();
+		empList = p.finalList();
+
+		// System.out.println(list);
+		rootElement(empList);
+		addRepotesss(empList);
+		displayTree(rootEmp);
 	}
 
 	public void rootElement(List<Employee> list) {
@@ -31,24 +31,31 @@ public class HeirarchyBuilderto {
 		for (Employee emp : list) {
 			for (Employee emp1 : list) {
 				if (emp.getEmployee_id() == emp1.getManager_id()) {
-					emp.addRepotees(emp1);
-				//	System.out.println(emp.getEmployee_name());
-				//	System.out.println("repotess = " + emp1.getEmployee_name());
+
+					emp.addRepotee(emp1);
+
+					/*
+					 * System.out.println(emp.getEmployee_name());
+					 * System.out.println("repotess = " +
+					 * emp1.getEmployee_name());
+					 */
+					System.out.println(emp.getEmployee_name() + " repo="
+							+ emp1.getEmployee_name());
+
 				}
 			}
 		}
 	}
 
-	public void displayTree() {
-		System.out.println(rootEmp.getEmployee_name());
-		for (Employee emp : list) {
-			
-		}
-	}
-	
-	public List<Employee> getRepoteeList(){
+	public void displayTree(Employee e) {
 
-		return list;
+		System.out.println(rootEmp.getEmployee_name());
+		List<Employee> emp = e.getRepotessList();
+
+		for (Employee d : emp) {
+			System.out.println("	" + d.getEmployee_name());
+		}
+
 	}
 
 }

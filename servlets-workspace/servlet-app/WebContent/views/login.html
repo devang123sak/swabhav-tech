@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Page</title>
+<style>
+#nameAlert {
+	color: rgb(253, 7, 7);
+	margin-top: -135px;
+	margin-left: 880px;
+}
+
+#passwordAlert {
+	color: rgb(253, 7, 7);
+	margin-top: 20px;
+	margin-left: 900px;
+}
+</style>
+</head>
+<body>
+	<div align="center" style="margin-top: 15%">
+		<form name="loggingForm"
+			action="http://localhost:8080/servlet-app/Authentication"
+			onsubmit="return validateForm()" method="POST">
+			Name: <input type="text" name="fname"> </br> </br> PassWord: <input
+				type="password" name="fpassword"></br> </br> </br> <input type="submit"
+				value="Submit">
+		</form>
+	</div>
+
+	<div id="nameAlert">* Name must be filled out</div>
+	<div id="passwordAlert">* PassWord must be filled out</div>
+	<script>
+		document.getElementById("nameAlert").style.visibility = "hidden";
+		document.getElementById("passwordAlert").style.visibility = "hidden";
+
+		function validateForm() {
+
+			var name = document.forms["loggingForm"]["fname"].value;
+			var password = document.forms["loggingForm"]["fpassword"].value;
+			if (name == "") {
+				document.getElementById("passwordAlert").style.visibility = "hidden";
+				document.getElementById("nameAlert").style.visibility = "visible";
+				return false;
+			}
+
+			if (password == "") {
+				document.getElementById("nameAlert").style.visibility = "hidden";
+				document.getElementById("passwordAlert").style.visibility = "visible";
+				return false;
+			}
+
+		}
+	</script>
+
+</body>
+</html>
