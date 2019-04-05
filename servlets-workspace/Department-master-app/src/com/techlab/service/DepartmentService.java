@@ -19,5 +19,17 @@ public class DepartmentService {
 	public List<Department> getList() {
 		return deptRepository.getList();
 	}
+	
+	public void deleteDept(String deptNo) {
+		deptRepository.deleteDept(deptNo);
+	}
+	
+//	public void updateDept(String deptNo) {
+//		deptRepository.updateDept(deptNo);
+//	}
+	public Department updateDept(int deptNo) {
+		return deptRepository.getDeptNo(deptNo);
+		
+	}
 
 }

@@ -54,7 +54,83 @@ public class DepartmentRepository {
 			e.printStackTrace();
 		}
 		return departmentList;
-
 	}
+
+	public void deleteDept(String deptNo) {
+		try {
+//		Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:4040/swabhav", "root", "root");
+			String sql = "DELETE FROM dept WHERE DEPTNO = ?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, deptNo);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateDept(String deptNo) {
+		try {
+//		Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:4040/swabhav", "root", "root");
+			String sql = "UPDATE  FROM dept WHERE DEPTNO = ?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, deptNo);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+//	public Department getDeptNo(String deptNo) {
+//		System.out.println("reach here");
+//		try {
+////			Class.forName("com.mysql.jdbc.Driver");
+//			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:4040/swabhav", "root", "root");
+//			PreparedStatement stmt = con.prepareStatement(" select * from dept where DEPTNO = "+deptNo+";");
+//			System.out.println(" select * from dept where DEPTNO = "+deptNo);
+//			ResultSet rs = stmt.executeQuery();
+//			System.out.println(rs.getString("DEPTNO")+rs.getString("DNAME"));
+//			con.close();
+//			rs.close();
+//			return  (Department) rs;
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+	
+	public Department getDeptNo(int deptNo) {
+		 ResultSet rs = null;
+		    PreparedStatement pstmt = null;
+		    try {
+		    	Connection conn =DriverManager.getConnection("jdbc:mysql://localhost:4040/swabhav", "root", "root");
+		      String query = "select DEPTNO, DNAME, LOC from dept where deptno > ?";
+
+		      pstmt = conn.prepareStatement(query); // create a statement
+		      pstmt.setInt(1, deptNo); // set input parameter
+		      rs = pstmt.executeQuery();
+		      System.out.println(rs.toString());
+		      // extract data from the ResultSet
+		      while (rs.next()) {
+		        String dbDeptNumber = rs.getString(1);
+		        String dbDeptName = rs.getString(2);
+		        String dbDeptLocation = rs.getString(3);
+		        System.out.println(dbDeptNumber + "\t" + dbDeptName + "\t" + dbDeptLocation);
+		        return new Department(dbDeptNumber ,dbDeptName , dbDeptLocation);
+		      }
+		      
+		      rs.close();
+		        pstmt.close();
+		        conn.close();
+		    } catch (Exception e) {
+		      e.printStackTrace();
+		    } finally {
+		    }
+			return null;
+		  }
+		
+	
 
 }
