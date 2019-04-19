@@ -24,10 +24,13 @@ public class DepartmentService {
 		deptRepository.deleteDept(deptNo);
 	}
 	
-//	public void updateDept(String deptNo) {
-//		deptRepository.updateDept(deptNo);
-//	}
-	public Department updateDept(int deptNo) {
+	public void updateDept(String deptNo) {
+		deptRepository.updateDept(deptNo);
+	}
+	
+	
+	public Department getDeptData(int deptNo) {
+//		System.out.println("service="+deptRepository.getDeptNo(deptNo));
 		return deptRepository.getDeptNo(deptNo);
 		
 	}

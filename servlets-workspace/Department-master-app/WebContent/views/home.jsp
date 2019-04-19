@@ -10,5 +10,6 @@
 <a href="http://localhost:8080/Department-master-app/home">1)Home</a><br>
 <a href="http://localhost:8080/Department-master-app/display">2)Display List</a><br>
 <a href="http://localhost:8080/Department-master-app/add">3)ADD DEPT</a><br>
+<a href="http://localhost:8080/Department-master-app/logout">3)LOGOUT</a>
 </body>
 </html>

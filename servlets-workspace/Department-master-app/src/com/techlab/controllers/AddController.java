@@ -24,6 +24,7 @@ public class AddController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("views/add.jsp");
 		dispatcher.forward(request, response);
+		System.out.println("hitting add get method");
 		
 	}
 
